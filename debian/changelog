@@ -1,3 +1,9 @@
+bubba-album (1.2.0.5) estelle claire; urgency=low
+
+  * Not showing restricted ablums.
+
+ -- PA Nilsson <pa@excito.com>  Wed, 03 Feb 2010 11:18:16 +0100
+
 bubba-album (1.2.0.4) estelle claire; urgency=emergency
 
   * check for public in access 
