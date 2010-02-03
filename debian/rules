@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk 
+install/bubba-album::
+	install -DT album_database.sql debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/install/mysql
+
+binary-post-install/bubba-album::
+	dh_codeigniter --destdir=/usr/share/album -x

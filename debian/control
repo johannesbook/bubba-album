@@ -1,0 +1,18 @@
+Source: bubba-album
+Section: web
+Priority: standard
+Maintainer: Carl Fürstenberg <carl@excito.com>
+Build-Depends: debhelper (>= 5), cdbs, libphp-codeigniter-dev (>= 1.7.1-3)
+Standards-Version: 3.8.0
+Homepage: http://www.excito.com
+
+Package: bubba-album
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ dbconfig-common,
+ epeg,
+ mysql-server (>= 5.0) | mysql-server-5.0 | mysql-server-5.1,
+ libimage-exiftool-perl,
+ libfile-type-perl
+Description: The codeigniter based album public interface
+ An public album interface for the Bubba album suite

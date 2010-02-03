@@ -1,0 +1,91 @@
+a:link,
+a:active,
+a:visited {
+	color: white;
+	text-decoration : underline;
+}
+
+h1 {
+	margin : 5px;
+}
+
+fieldset {
+	border: 0;
+	margin-top: 1em;
+	border-top: 3px solid #555;
+	background: #202020;
+	padding: 1em;
+}
+
+legend {
+	background:#555555 none repeat scroll 0 0;
+	padding:0.2em 1em;
+}
+
+input {
+	background:#EEEEEE none repeat scroll 0 0;
+	border:1px solid #000000;
+	margin:0.2em;
+	padding:0.2em;
+}	
+
+input[type='text'],input[type='password'] {
+	width : 150px;
+}
+
+div#login {
+	text-align : left;
+}
+
+div.img_header {
+	text-align : left;
+	display : none;
+}
+
+div#subalbum_container img {
+	border: none;
+}
+
+div.subalbum_header {
+	padding : 5px;
+	
+}
+
+table#album_table {
+	border-collapse: collapse;
+}
+
+table#album_table .thumb{
+	border-collapse: collapse;
+}
+
+
+div.album_name {
+	width: 150px;
+	font-weight : bold;
+}
+
+div.album_header {
+	font-weight : bold;
+	font-size : 1.5em;
+}
+
+div.album_caption {
+	width: 150px;
+	font-style : italic;
+	
+}
+div.album_section {
+	width : 100%;
+	text-align: center;
+	margin-bottom : 10px;
+}
+
+div.subalbum {
+	font-size : smaller;
+	width : 90px;
+}
+
+td.album_list {
+	vertical-align: top;
+}

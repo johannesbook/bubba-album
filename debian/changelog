@@ -1,0 +1,124 @@
+bubba-album (1.2.0.4) estelle claire; urgency=emergency
+
+  * check for public in access 
+
+ -- Carl Fürstenberg <carl@excito.com>  Thu, 03 Sep 2009 15:17:19 +0200
+
+bubba-album (1.2.0.3) estelle claire; urgency=low
+
+
+  [ PA Nilsson ]
+  * Changed "Home" to "Ablums", closes #892
+
+ -- Carl Fürstenberg <carl@excito.com>  Mon, 24 Aug 2009 15:38:30 +0200
+
+bubba-album (1.2.0.2) claire; urgency=low
+
+  * allow bot view and download of original (dual links) 
+
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 28 Jul 2009 15:50:31 +0200
+
+bubba-album (1.2.0.1) claire; urgency=low
+
+  * Add Content-Disposition to allow specification of filename (Closes: #965)
+  * Set Content-type actually of the path to the images
+
+ -- Carl Fürstenberg <carl@excito.com>  Sat, 25 Jul 2009 17:36:48 +0200
+
+bubba-album (1.2) estelle; urgency=low
+
+  * Bumping version to 1.2 for release 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 03 Jul 2009 11:51:05 +0200
+
+bubba-album (0.99.15) estelle; urgency=low
+
+  * Make base_uri to be relative (i.e. "/album"). 
+
+ -- Carl Fürstenberg <carl@excito.com>  Thu, 02 Jul 2009 12:31:56 +0200
+
+bubba-album (0.99.14) estelle; urgency=low
+
+  * different base_url depending if we are using http or https, Closes: #939 
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 01 Jul 2009 12:28:34 +0200
+
+bubba-album (0.99.13) estelle; urgency=low
+
+  * include currentIndex in argument 
+
+ -- Carl Fürstenberg <carl@excito.com>  Thu, 11 Jun 2009 12:09:23 +0200
+
+bubba-album (0.99.12) estelle; urgency=low
+
+  * adding keydown events (Closes: #000834) 
+
+ -- Carl Fürstenberg <carl@excito.com>  Thu, 11 Jun 2009 11:45:45 +0200
+
+bubba-album (0.99.11) estelle; urgency=low
+
+  * also make sure that the image is shown up if we have access all the way 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 18:10:26 +0200
+
+bubba-album (0.99.10) estelle; urgency=low
+
+  * Modify so that any first subalbum image is displayed as thumb image, if
+    possible.
+  * Make locked subalbum be shown per default in list
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 17:40:04 +0200
+
+bubba-album (0.99.9) estelle; urgency=low
+
+  * made new lock image 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 16:56:46 +0200
+
+bubba-album (0.99.8) estelle; urgency=low
+
+  * make locked be visible 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 15:30:57 +0200
+
+bubba-album (0.99.7) estelle; urgency=low
+
+  * and an ; 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 15:23:21 +0200
+
+bubba-album (0.99.6) estelle; urgency=low
+
+  * forgot to load auth lib 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 15:21:08 +0200
+
+bubba-album (0.99.5) estelle; urgency=low
+
+  * bugfix 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 15:15:32 +0200
+
+bubba-album (0.99.4) estelle; urgency=low
+
+  * adding auth control for images 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 05 Jun 2009 15:01:57 +0200
+
+bubba-album (0.99.3) estelle; urgency=low
+
+  * Added cation function to model and linked in new default image
+
+ -- PA Nilsson <pa@excito.com>  Fri,  5 Jun 2009 11:09:16 +0200
+
+bubba-album (0.99.2) estelle; urgency=low
+
+  * Added 'B2-style' to album
+
+ -- PA Nilsson <pa@excito.com>  Fri,  5 Jun 2009 10:38:09 +0200
+
+bubba-album (0.99.1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 06 May 2009 10:34:21 +0200

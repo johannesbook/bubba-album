@@ -1,0 +1,7 @@
+type => "_DBC_DBTYPE_",
+name => "_DBC_DBNAME_",
+host => "_DBC_DBSERVER_",
+port => "_DBC_DBPORT_",
+user => "_DBC_DBUSER_",
+pass => "_DBC_DBPASS_",
+
