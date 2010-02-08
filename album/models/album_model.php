@@ -19,18 +19,19 @@ class Album_model extends Model {
 		return $this->db->select( 'parent' )->from( 'album' )->where( array( 'id' => $album_id ) )->get()->row()->parent;
 	}
 	function get_albums( $parent = null, $uid = false ) {
-		$this->db->select('album.id AS id , album.name AS name, album.caption AS caption, album.path AS path, image.id AS image_id');
-		$this->db->from( 'album' );
-		$this->db->where( 'parent', $parent );
-		$this->db->where( 'access.user', $uid );
-		$this->db->or_where( 'album.public', 1 );
-		$this->db->join( 'image', 'image.album = album.id', 'left');
-		$this->db->join( 'access', 'access.album = album.id', 'left');
-		$this->db->group_by('album.id');
-		$this->db->order_by('album.name',"desc");
-		$this->db->distinct();
-
-		$query = $this->db->get();
+		$query = $this->db->query('SELECT DISTINCT 
+			`album`.`id` AS id, 
+			`album`.`name` AS name, 
+			`album`.`caption` AS caption, 
+			`album`.`path` AS path, 
+			`image`.`id` AS image_id 
+			FROM (`album`) 
+			LEFT JOIN `image` ON `image`.`album` = `album`.`id` 
+			LEFT JOIN `access` ON `access`.`album` = `album`.`id`
+			WHERE `parent` = ? AND (`access`.`user` = ? OR `album`.`public` = 1) 
+			GROUP BY `album`.`id` 
+			ORDER BY `album`.`name` desc
+			', array( $parent, $uid ) );
 
 		if( $query->num_rows() > 0 ) {
 			$arr = $query->result_array();

@@ -1,3 +1,10 @@
+bubba-album (1.2.0.6) claire estelle; urgency=low
+
+  * "active records" doesn't handle complex stuff, thus fix in 1.2.0.5 breaks
+    things. fix it by converting it to a basic query.
+
+ -- Carl Fürstenberg <carl@excito.com>  Mon, 08 Feb 2010 21:00:50 +0100
+
 bubba-album (1.2.0.5) estelle claire; urgency=low
 
   * Not showing restricted ablums.
