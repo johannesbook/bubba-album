@@ -19,6 +19,8 @@ class Album_model extends Model {
 		return $this->db->select( 'parent' )->from( 'album' )->where( array( 'id' => $album_id ) )->get()->row()->parent;
 	}
 	function get_albums( $parent = null, $uid = false ) {
+		$parent_sql = is_null($parent) ? '`parent` IS NULL' : '`parent` = '.mysql_escape_string( $parent );
+		$uid_sql = !$uid ? 'FALSE' : '`access`.`user` = '.mysql_escape_string( $uid );
 		$query = $this->db->query('SELECT DISTINCT 
 			`album`.`id` AS id, 
 			`album`.`name` AS name, 
@@ -28,7 +30,10 @@ class Album_model extends Model {
 			FROM (`album`) 
 			LEFT JOIN `image` ON `image`.`album` = `album`.`id` 
 			LEFT JOIN `access` ON `access`.`album` = `album`.`id`
-			WHERE `parent` = ? AND (`access`.`user` = ? OR `album`.`public` = 1) 
+			WHERE 
+			'.$parent_sql.'
+			AND
+			( '.$uid_sql.' OR `album`.`public` = 1 ) 
 			GROUP BY `album`.`id` 
 			ORDER BY `album`.`name` desc
 			', array( $parent, $uid ) );
