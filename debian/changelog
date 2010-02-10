@@ -1,3 +1,9 @@
+bubba-album (1.3.0) claire estelle; urgency=low
+
+  * Updated version number. 
+
+ -- PA Nilsson <pa@excito.com>  Wed, 10 Feb 2010 15:28:59 +0100
+
 bubba-album (1.2.0.7) claire estelle; urgency=low
 
   * sql requires some funky clauses for null 
