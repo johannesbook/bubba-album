@@ -1,8 +1,6 @@
 
 <div id="login">
-<div id="header">
-	<a href="/album">Albums</a>
-</div>
+
 <h1 class="segment_title"><span class="title">Login</span></h1>
 
 <?php echo form_open('album/login'); ?>

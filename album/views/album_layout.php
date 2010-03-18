@@ -3,31 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title><?=$title?></title>
+<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.theme.default.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/admin.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/album.css" />
-<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/screen.css" />
-<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.js"></script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery-ui.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.galleriffic.min.js"></script>
 </head>
 <body>
-<div id="main">
-	<? if(!preg_match("/Album login/i",$title)) { ?>
-		<div id="header">
-		<?=anchor("album/index",'Albums')?> |
-		<?if(isset($parent)):?>
-		<?=anchor("album/section/$parent",'Parent album')?> |
-		<?endif?>
+<div id="wrapper">
+	<div id="content_wrapper">
+	<div id="header">
+	<div id="fn-header-left">
+	<span>
+		<?=anchor("album/index",'Albums')?>
+	</span>
+	<?if(isset($parent)):?>
+	<span> | <?=anchor("album/section/$parent",'Parent album')?></span>
+	<?endif?>
+	</div>
+	<h1><?=$title?></h1>
+	<div id="fn-header-right">
+	<span> <?=anchor( (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] .'/admin/album','Manage')?> | </span>
 		<?if($this->auth->has_session()):?>
 		<?=anchor("album/logout",'Log out')?>
 		<?else:?>
 		<?=anchor("album/login",'Log in')?>
 		<?endif?>
-		</div>
-	<?}?>
+	</div>
+	</div>
+
+	<div id="content">
 	<?=$content_for_layout?>
-<div class="clear" >
+	</div>
+	</div>
 </div>
-</div>
-<div id="footer">
+<div id="logo">
+<?=img('views/_img/logo.png')?>
 </div>
 </body>
 </html>

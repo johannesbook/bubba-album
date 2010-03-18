@@ -1,42 +1,3 @@
-a:link,
-a:active,
-a:visited {
-	color: white;
-	text-decoration : underline;
-}
-
-h1 {
-	margin : 5px;
-}
-
-fieldset {
-	border: 0;
-	margin-top: 1em;
-	border-top: 3px solid #555;
-	background: #202020;
-	padding: 1em;
-}
-
-legend {
-	background:#555555 none repeat scroll 0 0;
-	padding:0.2em 1em;
-}
-
-input {
-	background:#EEEEEE none repeat scroll 0 0;
-	border:1px solid #000000;
-	margin:0.2em;
-	padding:0.2em;
-}	
-
-input[type='text'],input[type='password'] {
-	width : 150px;
-}
-
-div#login {
-	text-align : left;
-}
-
 div.img_header {
 	text-align : left;
 	display : none;
@@ -61,7 +22,6 @@ table#album_table .thumb{
 
 
 div.album_name {
-	width: 150px;
 	font-weight : bold;
 }
 
@@ -71,7 +31,6 @@ div.album_header {
 }
 
 div.album_caption {
-	width: 150px;
 	font-style : italic;
 	
 }
@@ -83,9 +42,245 @@ div.album_section {
 
 div.subalbum {
 	font-size : smaller;
-	width : 90px;
 }
 
 td.album_list {
 	vertical-align: top;
 }
+div.navigation ul li{
+	display: inline;
+}
+div.navigation ul {
+	list-style: none;
+}
+div.navigation{
+	width:200px;
+	top: 0;
+	left: 140px;
+	position:absolute
+}
+
+#gallery-section {
+		position: absolute;
+		right: 0;
+		background-color:none;
+}
+div.content a, div.navigation a {
+		text-decoration: none;
+		color: #333;
+}
+div.content  a:focus, div.content  a:hover, div.content  a:active {
+		text-decoration: underline;
+}
+#fn-subalbum-header {
+		border: 1px solid #ccc;
+		background-color: #ddd;
+		margin-top: 5px;
+		height: 23px;
+		width: 100%;
+}
+#controls-section {
+		border: 1px solid #ccc;
+		background-color: #ddd;
+		margin-top: 5px;
+		height: 23px;
+		width: 600px;
+}
+div.controls a {
+		padding: 5px;
+}
+div.ss-controls {
+		float: left;
+}
+div.nav-controls {
+		float: right;
+}
+
+div.loader {
+		background-image: url('../_img/loader.gif');
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 600px;
+		height: 350px
+}
+div#slideshow-section-wrapper {
+	text-align : center;
+	width : 600px;
+	height : 50px;
+	background-color : red;
+}
+div.slideshow {
+		clear: both;
+}
+div.slideshow span.image-wrapper {
+		padding-bottom: 12px;
+}
+div.slideshow a.advance-link {
+		display: block;
+		border: none;
+}
+div.slideshow img {
+		border: 1px solid #ccc;
+		padding : 2px;
+}
+div.download {
+		float: right;
+}
+div#caption-section {
+	width: 600px;
+		clear: both;
+		text-align: left;
+		border: 1px solid #ccc;
+		background-color: #ddd;
+		padding: 5px;
+		margin-top : 5px;
+}
+
+
+div.image-title {
+		font-weight: bold;
+}
+
+div.image-desc {
+		padding-top: 5px;
+}
+div.navigation {
+		/* The navigation style is set by a javascript generated style on the page.
+		 *	   This is so that the javascript specific styles won't be applied unless javascript is enabled. */
+}
+ul.thumbs {
+		clear: both;
+		margin: 0;
+		padding: 0;
+}
+ul.thumbs li {
+		float: left;
+		padding: 0;
+		margin: 5px 10px 5px 0;
+		list-style: none;
+		width : 86px;
+}
+a.thumb {
+		padding: 2px;
+		display: block;
+		border: 1px solid #444;
+		text-decoration : none;
+}
+ul.thumbs li.selected a.thumb {
+		background: #fff;
+}
+a.thumb:focus {
+		outline: none;
+}
+ul.thumbs img {
+		border: none;
+		display: block;
+}
+div.pagination {
+		clear: both;
+}
+div.navigation div.top {
+		border: 1px solid #ccc;
+		background-color: #ddd;
+		margin-top: 5px;
+		height: 23px;
+		width: 100%;		
+}
+div.navigation div.bottom {
+		margin-top: 12px;
+}
+div.pagination a, div.pagination span.current {
+		display: block;
+		float: left;
+		margin-right: 2px;
+		margin-left : 2px;
+		padding: 2px;
+		width : 12px;
+}
+div.pagination a:hover {
+		text-decoration: none;
+		color : #333;
+		font-weight : bold;
+		
+}
+div.pagination span.current {
+		font-weight: bold;
+		color: #333;
+}
+
+div.content{
+
+	display:block;
+}
+
+#fn-album-container {
+	position: relative;
+}
+
+#content {
+	position: relative;
+	padding-top: .5em;
+	width: 100%;
+}
+#header {
+	position: relative;
+	background-color: #000;
+	color: #fff;
+	padding: 1em;
+	margin-bottom: .5em;
+	margin-top: .5em;
+}
+#header * {
+	color: #fff;
+}
+#header h1 {
+	text-align: center;
+}
+
+#fn-header-right {
+	position: absolute;
+	right: 1em;
+	top: 1em;
+}
+#fn-header-left {
+	position: absolute;
+	left: 1em;
+	top: 1em;
+}
+div#album_index_view {
+	text-align : center;
+	margin : 0 auto;
+}
+div#album_index_view img {
+	border : 1px solid #CCCCCC;
+	padding : 2px;
+}
+
+div#album_index_view a {
+	text-decoration : none;
+	display : block;
+	border : none;
+}
+
+div#album_index_view .album_header {
+	margin-bottom : 25px;
+}
+
+div#album_index_view table {
+	display : inline;
+}
+
+.fn-subalbum-container { 
+	position: absolute;
+	left: 0;
+	width: 130px;
+
+}
+.fn-subalbum-content { 
+	margin: .3em;
+}
+.fn-subalbum-item { margin: 0px; text-align: center; }
+.fn-subalbum-item a.thumb {
+	border: 0 !important;
+}
+

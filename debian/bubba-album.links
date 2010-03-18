@@ -1,1 +1,5 @@
 /usr/share/bubba-album/apache.conf /etc/apache2/conf.d/album.conf
+/usr/share/web-admin/admin/views/default/_js/jquery.js /usr/share/album/views/_js/jquery.js
+/usr/share/web-admin/admin/views/default/_js/jquery-ui.js /usr/share/album/views/_js/jquery-ui.js
+/usr/share/web-admin/admin/views/default/_css/jquery.ui.theme.default.css /usr/share/album/views/_css/jquery.ui.theme.default.css
+/usr/share/web-admin/admin/views/default/_css/admin.css /usr/share/album/views/_css/admin.css

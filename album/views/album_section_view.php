@@ -1,24 +1,26 @@
-<h1 class="segment_title"><span class="title"><?=$name?></span></h1>
 <div class="album_caption album_section"><?=$caption?$caption:"&nbsp;"?></div>
 
-<div id="subalbum_container">
 	<?if(isset($albums)):?>
-		<div class="controls">Subalbums</div>
+<div class="fn-subalbum-container ui-widget ui-corner-all">
+		<div class="controls" id="fn-subalbum-header">Subalbums</div>
+		<div class="fn-subalbum-content">
 		<?foreach( array_chunk( $albums, $this->config->item('album_width') ) as $row ):?>
 			<?foreach( $row as $album ):?>
-					<div>
+					<div class="fn-subalbum-item">
 						<?if(is_null($album['image_id'])):?>
 						<?=anchor("album/section/$album[id]",img("image/blank/$album[id]", true))?>
 						<?else:?>
 						<?=anchor("album/section/$album[id]",img("image/thumb/$album[image_id]", true),array("class" => "thumb"))?>
 						<?endif?>
-					</div>
 					<div class="album_name subalbum"><?=$album['name']?></div>
 					<div class="album_caption subalbum"><?=$album['caption']?></div>
+					</div>
 			<?endforeach?>
 		<?endforeach?>
-	<?endif?>
+		</div>
 </div>
+	<?endif?>
+<div id="fn-album-container">
 
 
 <?if(isset($images)):?>
@@ -49,6 +51,7 @@
 		<?endforeach?>
 		</ul>
 	<?endforeach?>
+</div>
 </div>
 
 <?endif?>
@@ -131,6 +134,5 @@ $(document).ready(function() {
 });
 </script>
 		<script type="text/javascript">
-			document.write("<style type='text/css'>div.navigation{width:200px;float: left; margin-left:130px;position:absolute}div.content{display:block;}</style>");
 		</script>
 
