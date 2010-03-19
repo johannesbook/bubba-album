@@ -1,3 +1,9 @@
+bubba-album (1.9.2) claire; urgency=low
+
+  * fix positions and login view 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 19 Mar 2010 14:14:09 +0100
+
 bubba-album (1.9.1) claire; urgency=low
 
   * update album for 2.0 release

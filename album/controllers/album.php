@@ -29,7 +29,7 @@ class Album extends Controller {
 				redirect('album/index/');
 			}
 		} else {
-			$this->layout->setLayout('album_layout', array('title' => "Album login"));
+			$this->layout->setLayout('album_layout', array('title' => "Album login", 'hide_header_right' => true));
 			$this->layout->view('album_login',$data);
 		}
 	}

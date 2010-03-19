@@ -11,7 +11,7 @@
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.galleriffic.min.js"></script>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper" class="fn-page-<?=$this->uri->segment(2)?>">
 	<div id="content_wrapper">
 	<div id="header">
 	<div id="fn-header-left">
@@ -23,6 +23,7 @@
 	<?endif?>
 	</div>
 	<h1><?=$title?></h1>
+	<?if(!isset($hide_header_right) || !$hide_header_right):?>
 	<div id="fn-header-right">
 	<span> <?=anchor( (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] .'/admin/album','Manage')?> | </span>
 		<?if($this->auth->has_session()):?>
@@ -31,6 +32,7 @@
 		<?=anchor("album/login",'Log in')?>
 		<?endif?>
 	</div>
+	<?endif?>
 	</div>
 
 	<div id="content">

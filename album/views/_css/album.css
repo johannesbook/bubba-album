@@ -283,4 +283,22 @@ div#album_index_view table {
 .fn-subalbum-item a.thumb {
 	border: 0 !important;
 }
+#logo {
+	position: fixed;
+	bottom: 2em;
+	right: 2em;
+	opacity: .6;
+}
 
+#wrapper.fn-page-login {
+margin:0;
+padding:0;
+max-width: none;
+width:100%;
+}
+#wrapper.fn-page-login #content_wrapper {
+	margin: 0;
+	width: 400px;
+	float: none;
+	position: absolute;
+}

@@ -1,4 +1,3 @@
-<h1 class="segment_title"><span class="title">BUBBA|TWO Photo Gallery</span></h1>
 <?if(isset($albums)):?>
 
 <div id="album_index_view">
