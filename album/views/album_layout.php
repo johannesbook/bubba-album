@@ -25,7 +25,7 @@
 	<h1><?=$title?></h1>
 	<?if(!isset($hide_header_right) || !$hide_header_right):?>
 	<div id="fn-header-right">
-	<span> <?=anchor( (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] .'/admin/album','Manage')?> | </span>
+	<span> <?=anchor( (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] .'/admin/album','Manage albums')?> | </span>
 		<?if($this->auth->has_session()):?>
 		<?=anchor("album/logout",'Log out')?>
 		<?else:?>
