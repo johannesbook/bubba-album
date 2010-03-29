@@ -1,3 +1,9 @@
+bubba-album (1.9.3) claire; urgency=low
+
+  * Add character encoding hint on filenames on download 
+
+ -- Tor Krill <tor@excito.com>  Mon, 29 Mar 2010 10:49:04 +0200
+
 bubba-album (1.9.2) claire; urgency=low
 
   * fix positions and login view 

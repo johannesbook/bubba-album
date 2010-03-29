@@ -36,7 +36,7 @@ class Image extends Controller {
 		if( !is_null($aid) && $this->_album_access( $aid ) ) {
 			$this->load->helper('album');
 			$this->output->set_header('Content-Type: image/png');
-			$this->output->set_header('Content-Disposition: inline; filename="'.mb_encode_mimeheader('blank.png', "utf8", "Q").'"');
+			$this->output->set_header('Content-Disposition: inline; filename*=utf8''"'.mb_encode_mimeheader('blank.png', "utf8", "Q").'"');
 			$path = 'views/_img/blank.png';
 			if( cache_control( $path ) ) {
 				$this->output->set_output(file_get_contents($path));
@@ -48,7 +48,7 @@ class Image extends Controller {
 	function locked() {
 		$this->load->helper('album');
 		$this->output->set_header('Content-Type: image/png');
-			$this->output->set_header('Content-Disposition: inline; filename="'.mb_encode_mimeheader('locked.png', "utf8", "Q").'"');
+			$this->output->set_header('Content-Disposition: inline; filename*=utf-8''"'.mb_encode_mimeheader('locked.png', "utf8", "Q").'"');
 		$path = 'views/_img/locked.png';
 		if( cache_control( $path ) ) {
 			$this->output->set_output(file_get_contents($path));
@@ -61,7 +61,7 @@ class Image extends Controller {
 			$this->load->model("Album_model");
 			list( $name, $path ) = $this->Album_model->get_thumbnail( $id );
 			$this->output->set_header('Content-Type: '. mime_content_type( $path ));
-			$this->output->set_header('Content-Disposition: inline; filename="'.mb_encode_mimeheader($name, "utf8", "Q").'"');
+			$this->output->set_header('Content-Disposition: inline; filename*=utf-8''"'.mb_encode_mimeheader($name, "utf8", "Q").'"');
 			if( cache_control( $path ) ) {
 				$this->output->set_output(file_get_contents($path));
 			}
@@ -75,7 +75,7 @@ class Image extends Controller {
 			$this->load->model("Album_model");
 			list( $name, $path ) = $this->Album_model->get_medium_image( $id );
 			$this->output->set_header('Content-Type: '. mime_content_type( $path ));
-			$this->output->set_header('Content-Disposition: inline; filename="'.mb_encode_mimeheader($name, "utf8", "Q").'"');
+			$this->output->set_header('Content-Disposition: inline; filename*=utf-8''"'.mb_encode_mimeheader($name, "utf8", "Q").'"');
 			if( cache_control( $path ) ) {
 				$this->output->set_output(file_get_contents($path));
 			}
@@ -96,7 +96,7 @@ class Image extends Controller {
 			list( $name, $path ) = $this->Album_model->get_full_image( $id );
 			$this->output->set_header('Content-Type: '. mime_content_type( $path ));
 			# XXX Question regarding original image should be inline or attachment
-			$this->output->set_header('Content-Disposition: '.($inline?'inline':'attachment').'; filename="'.mb_encode_mimeheader($name, "utf8", "Q").'"');
+			$this->output->set_header('Content-Disposition: '.($inline?'inline':'attachment').'; filename*=utf-8''"'.mb_encode_mimeheader($name, "utf8", "Q").'"');
 			if( cache_control( $path ) ) {
 				$this->output->set_output(file_get_contents($path));
 			}
