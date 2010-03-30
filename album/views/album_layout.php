@@ -40,8 +40,5 @@
 	</div>
 	</div>
 </div>
-<div id="logo">
-<?=img('views/_img/logo.png')?>
-</div>
 </body>
 </html>

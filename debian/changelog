@@ -1,3 +1,10 @@
+bubba-album (1.9.4) claire; urgency=low
+
+  * fix style relative new admin update
+  * fix errorious code from previous commit
+
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 30 Mar 2010 16:59:06 +0200
+
 bubba-album (1.9.3) claire; urgency=low
 
   * Add character encoding hint on filenames on download 

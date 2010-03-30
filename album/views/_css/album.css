@@ -229,6 +229,7 @@ div.content{
 	padding: 1em;
 	margin-bottom: .5em;
 	margin-top: .5em;
+	margin-right: 0;
 }
 #header * {
 	color: #fff;
@@ -301,4 +302,17 @@ width:100%;
 	width: 400px;
 	float: none;
 	position: absolute;
+}
+
+#content_wrapper {
+	float: none !important;
+	width: 1024px;
+	margin: 0 auto;
+}
+
+body {
+	background: #fff url('../_img/logo.png') no-repeat right bottom;
+}
+html, body {
+height:95%;
 }
