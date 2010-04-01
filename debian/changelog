@@ -1,3 +1,9 @@
+bubba-album (1.9.6) karmic; urgency=low
+
+  * Modified album width.
+
+ -- PA Nilsson <pa@excito.com>  Thu, 01 Apr 2010 21:57:11 +0200
+
 bubba-album (1.9.5) claire; urgency=low
 
   * fix filename character encoding field 
