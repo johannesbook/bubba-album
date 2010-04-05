@@ -84,7 +84,8 @@ div.content  a:focus, div.content  a:hover, div.content  a:active {
 		background-color: #ddd;
 		margin-top: 5px;
 		height: 23px;
-		width: 600px;
+		width: 594px;
+		padding : 5px;
 }
 div.controls a {
 		padding: 5px;
@@ -127,13 +128,13 @@ div.download {
 		float: right;
 }
 div#caption-section {
-	width: 600px;
-		clear: both;
-		text-align: left;
-		border: 1px solid #ccc;
-		background-color: #ddd;
-		padding: 5px;
-		margin-top : 5px;
+	width: 594px;
+	clear: both;
+	text-align: left;
+	border: 1px solid #ccc;
+	background-color: #ddd;
+	padding: 5px;
+	margin-top : 5px;
 }
 
 
@@ -262,6 +263,10 @@ div#album_index_view a {
 	display : block;
 	border : none;
 }
+div#album_index_view a.ui-link {
+	text-decoration : underline;
+	display : inline;
+}
 
 div#album_index_view .album_header {
 	margin-bottom : 25px;
@@ -302,17 +307,18 @@ width:100%;
 	width: 400px;
 	float: none;
 	position: absolute;
+	border: 1px solid #000;
+}
+#wrapper.fn-page-login #header {
+	margin-top : 0px;
 }
 
 #content_wrapper {
 	float: none !important;
-	width: 950px;
+	width: 1024px;
 	margin: 0 auto;
 }
 
-body {
-	background: #fff url('../_img/logo.png') no-repeat right bottom;
-}
 html, body {
 height:95%;
 }

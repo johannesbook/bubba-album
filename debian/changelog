@@ -1,3 +1,10 @@
+bubba-album (1.9.7) claire; urgency=low
+
+  * Removed logo.
+  * Added login link when no available albums.
+
+ -- PA Nilsson <pa@excito.com>  Mon, 05 Apr 2010 13:30:28 +0200
+
 bubba-album (1.9.6) karmic; urgency=low
 
   * Modified album width.
