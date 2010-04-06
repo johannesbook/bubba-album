@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title><?=$title?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.theme.default.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/admin.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/album.css" />
