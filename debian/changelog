@@ -1,3 +1,9 @@
+bubba-album (1.9.8) claire; urgency=low
+
+  * Added utf-8 meta tag.
+
+ -- PA Nilsson <pa@excito.com>  Tue, 06 Apr 2010 10:08:45 +0200
+
 bubba-album (1.9.7) claire; urgency=low
 
   * Removed logo.
