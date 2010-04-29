@@ -22,9 +22,14 @@
 			<?endforeach?>
 		<?else:?>
 			<tr>
-				<td>No available albums.<br>
+				<td>
+				<div>
+					No available albums.
+				</div>
 				<?if(!$this->auth->has_session()):?>
-					<a href="index.php/album/login" class="ui-link">Login</a> to view protected albums.</td>
+				<div>
+					<?=anchor("album/login","Login", array("class" => "ui-login ui-link"))?> to view protected albums.</td>
+				</div>
 				<?endif?>
 			</tr>		
 		<?endif?>

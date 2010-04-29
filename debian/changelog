@@ -1,3 +1,28 @@
+bubba-album (2.0.0.4) estelle claire; urgency=low
+
+  * Correcting style on albums in main view. 
+
+ -- PA Nilsson <pa@excito.com>  Fri, 23 Apr 2010 15:24:56 +0200
+
+bubba-album (2.0.0.3) estelle claire; urgency=low
+
+  * Removed incorrect style from login-link.
+
+ -- PA Nilsson <pa@excito.com>  Fri, 23 Apr 2010 14:17:21 +0200
+
+bubba-album (2.0.0.2) estelle claire; urgency=high
+
+  * fix link to login which was relative and might bork when comming from
+    "Albums" (Closes: #1433) 
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 21 Apr 2010 12:31:25 +0200
+
+bubba-album (2.0.0.1) claire estelle; urgency=high
+
+  * remove TWO from title (Closes: #1320)
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 21 Apr 2010 11:57:40 +0200
+
 bubba-album (1.9.8) claire; urgency=low
 
   * Added utf-8 meta tag.

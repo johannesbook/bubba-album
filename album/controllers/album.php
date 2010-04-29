@@ -8,7 +8,7 @@ class Album extends Controller {
 		$this->load->model("Album_model");
 		$albums = $this->Album_model->get_albums(null, $this->session->userdata('user_id'));
 		$data['albums'] = $albums;
-		$this->layout->setLayout('album_layout', array('title' => "BUBBA|TWO PHOTO GALLERY"));
+		$this->layout->setLayout('album_layout', array('title' => "BUBBA PHOTO GALLERY"));
 		$this->layout->view('album_index_view', $data);
 	}
 	function login() {
