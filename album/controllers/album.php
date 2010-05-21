@@ -3,75 +3,83 @@ class Album extends Controller {
 	function __construct() {
 		parent::Controller();
 		$this->load->library('Auth'); 
+		$this->load->helper('i18n');
+		load_lang('en');
+	}
+	function json() {
+		$this->load->model("Album_model");
+		$this->load->model('admin');
+		$userinfo = $this->admin->get_userinfo();
+
+		$album = json_decode($this->input->post('path'));
+		$manager_mode = json_decode($this->input->post('manager_mode'));
+		$username = false;
+		if( !isset( $userinfo['groups']['bubba'] ) ) {
+			$manager_mode = false;
+			if( isset( $userinfo['groups']['album'] ) ) {
+				$username = $userinfo['username'];
+			}
+		}
+
+		$albums = $this->Album_model->get_albums($album, $username, $manager_mode);
+		if( !is_null( $album ) ) {
+			$parents = $this->Album_model->get_album_parents($album);
+
+			$parent_album_numbers = $this->Album_model->get_album_parents_and_self($album);
+			$parent_album_data = $this->Album_model->get_album_names( $parent_album_numbers );
+			$parent_albums = array();
+			foreach( $parent_album_numbers as $idx ) {
+				foreach( $parent_album_data as $data ) {
+					if( $data['id'] == $idx ) {
+						array_unshift( $parent_albums, $data );
+						continue 2;
+					}
+				}
+			}
+		} else {
+			$parents =null;
+			$parent_albums = array();
+		}
+
+		if( $albums && is_array( $albums ) && count( $albums ) > 0 ) {
+			$count_subalbums = $this->Album_model->get_count_subalbums();
+			foreach( $albums as &$cur_album ) {
+				if( isset( $count_subalbums[$cur_album['id']] ) ) {
+					$cur_album['subalbum_count'] = $count_subalbums[$cur_album['id']];
+				}
+			}		
+			unset( $cur_album );
+		}
+		$images = $this->Album_model->get_album($album);
+
+		$meta = $this->Album_model->get_meta($album);
+		$data['albums'] = is_null($albums) ? array() : $albums;
+		$data['images'] = is_null($images) ? array() : $images;
+		$data['parents'] = is_null($parents) ? array() : $parents;
+		$data['parent_albums'] = is_null($parent_albums) ? array() : $parent_albums;
+		$data['meta'] = $meta;
+		$data['root'] = $album;
+
+		header("Content-type: application/json");
+		echo json_encode( $data );
+		return;
+
 	}
 	function index() {
 		$this->load->model("Album_model");
-		$albums = $this->Album_model->get_albums(null, $this->session->userdata('user_id'));
+		$this->load->model('admin');
+
+		//$this->admin->login('test','test');
+		$userinfo = $this->admin->get_userinfo();
+		$data['manager_access'] = $this->admin->has_manager_access();
+		$albums = $this->Album_model->get_albums(null, $userinfo['username'], $this->session->userdata('manager_mode') && $data['manager_access']);
 		$data['albums'] = $albums;
-		$this->layout->setLayout('album_layout', array('title' => "BUBBA PHOTO GALLERY"));
+
+		$this->layout->setLayout('album_layout', array(
+			'title' => "BUBBA PHOTO GALLERY", 
+			'userinfo' => $userinfo,
+			'head' => $this->load->view('album_index_head_view',$data,true) 
+		));
 		$this->layout->view('album_index_view', $data);
 	}
-	function login() {
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('validation');
-		$data["album"] = $this->uri->segment(3);
-		if(!$data["album"]) {
-			// if not set in uri, is this called from a faild login?
-			$data["album"] = $this->input->post('album');
-		}
-		$rules['username']	= "callback__check_login";
-		$rules['password']	= "required";
-		$this->validation->set_rules($rules);
-		if ($this->validation->run()) {
-			if($data["album"]) {
-				redirect('album/section/'.$data["album"]);
-			} else {
-				redirect('album/index/');
-			}
-		} else {
-			$this->layout->setLayout('album_layout', array('title' => "Album login", 'hide_header_right' => true));
-			$this->layout->view('album_login',$data);
-		}
-	}
-	function logout() {
-		$this->auth->logout();
-		redirect('album/index');
-	}
-	function _check_login($username) {
-		$password = $this->input->post('password');
-		if ($this->auth->login($username, $password)) {
-			return TRUE;
-		} else {
-			$this->validation->set_message('_check_login', 'Incorrect login info.');
-			return FALSE;
-		}
-	} 
-	function no_access() {
-			$this->layout->setLayout('album_layout', array('title' => "Access error"));
-			$this->layout->view('album_no_access');
-	}
-	function section( $album ) {
-		$this->load->model("Album_model");
-		if( ! $this->Album_model->album_exists( $album ) ) {
-				redirect('album/index');
-		}
-		if( ! $this->Album_model->album_is_public( $album ) ) {
-			if( ! $this->auth->has_session() ) {
-				redirect('album/login/'.$album);
-			} elseif ( !$this->Album_model->user_has_access_to($this->session->userdata('user_id'), $album) ) {
-				redirect('album/no_access');
-			}
-		}
-
-		$data['this_album'] = $album;
-		$data['name'] = $this->Album_model->album_name( $album );
-		$data['caption'] = $this->Album_model->album_caption( $album );
-		$parent = $this->Album_model->album_parent( $album );
-		$data['albums'] = $this->Album_model->get_albums( $album , $this->session->userdata('user_id'));
-		$data['images'] = $this->Album_model->get_album( $album );
-
-		$this->layout->setLayout('album_layout', array('title' => "Photo Gallery: '" . $data['name'] ."'", 'parent' => $parent));
-		$this->layout->view('album_section_view', $data);
-	}
 }
-?>

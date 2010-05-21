@@ -16,19 +16,30 @@ class Image extends Controller {
 	function _album_access( $album ) {
 		$this->load->model("Album_model");		
 
-		if( $this->Album_model->album_is_public( $album ) ) {
+		$this->load->model('admin');
+		$userinfo = $this->admin->get_userinfo();
+		if( isset( $userinfo['groups']['bubba'] ) ) {
 			return true;
 		}
 
-		if( ! $this->auth->has_session() ) {
+		if( $this->Album_model->album_is_public( $album ) ) {
+
+			return true;
+		}
+
+		if( ! $this->admin->is_logged_in() ) {
 			return false;
 		}
 
-		if( ! $this->Album_model->user_has_access_to($this->session->userdata('user_id'), $album) ) {
-			return false;
+		if( isset( $userinfo['groups']['album'] ) ) {
+			$userinfo = $this->admin->get_userinfo('username');
+			$username = $userinfo['username'];
+			if( $this->Album_model->user_has_access_to($username, $album) ) {
+				return true;
+			}
 		}
 
-		return true;
+		return false;
 
 	}
 
@@ -54,7 +65,15 @@ class Image extends Controller {
 			$this->output->set_output(file_get_contents($path));
 		}
 	}
-
+	function unlocked() {
+		$this->load->helper('album');
+		$this->output->set_header('Content-Type: image/png');
+		$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode('unlocked.png'));
+		$path = 'views/_img/unlocked.png';
+		if( cache_control( $path ) ) {
+			$this->output->set_output(file_get_contents($path));
+		}
+	}
 	function thumb( $id ) {
 		if( $this->_image_access( $id ) ) {
 			$this->load->helper('album');

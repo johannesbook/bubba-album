@@ -7,8 +7,8 @@ $config['thumbs_path'] = '/var/lib/album/thumbs';
 $config['image_chunks'] = 120;
 
 # 4:3 form factor
-$config['thumb_width'] = 80;
-$config['thumb_height'] = 60;
+$config['thumb_width'] = 100;
+$config['thumb_height'] = 100;
 
 # number of images in a row of subalbums
 $config['album_width'] = 4;

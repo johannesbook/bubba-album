@@ -1,3 +1,9 @@
+bubba-album (2.0.0.5) claire; urgency=low
+
+  * initial new style 
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 21 May 2010 17:06:05 +0200
+
 bubba-album (2.0.0.4) estelle claire; urgency=low
 
   * Correcting style on albums in main view. 
