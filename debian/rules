@@ -3,6 +3,7 @@
 include /usr/share/cdbs/1/rules/debhelper.mk 
 install/bubba-album::
 	install -DT album_database.sql debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/install/mysql
+	install -DT album_database_upgrade1.sql debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/upgrade/mysql/2.0.0.5
 
 binary-post-install/bubba-album::
 	dh_codeigniter --destdir=/usr/share/album -x
