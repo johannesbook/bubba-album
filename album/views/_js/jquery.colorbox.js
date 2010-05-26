@@ -344,8 +344,8 @@
 			animate_speed,
 			winHeight = $window.height(),
 			// keeps the top and left positions within the browser's viewport.
-			posTop = Math.max(winHeight - settings.h - loadedHeight - interfaceHeight,0)/2 + $window.scrollTop(),
-			posLeft = Math.max(document.documentElement.clientWidth - settings.w - loadedWidth - interfaceWidth,0)/2 + $window.scrollLeft();
+			posTop = Math.max(winHeight - settings.h - loadedHeight - interfaceHeight,0)/2,
+			posLeft = Math.max(document.documentElement.clientWidth - settings.w - loadedWidth - interfaceWidth,0)/2;
 
 			// setting the speed to 0 to reduce the delay between same-sized content.
 			animate_speed = ($cbox.width() === settings.w+loadedWidth && $cbox.height() === settings.h+loadedHeight) ? 0 : speed;

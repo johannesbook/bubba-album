@@ -14,6 +14,7 @@ class Login extends Controller {
 		if( $session_id ) {
 			$data['userinfo'] = $this->admin->get_userinfo($session_id);
 		}
+		$data['has_access'] = $this->admin->has_album_access();
 		header("Content-type: application/json");
 		print json_encode($data);
 	}

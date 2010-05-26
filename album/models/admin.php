@@ -6,7 +6,7 @@ class Admin extends Model {
 	function __construct() {
 		if( isset($_COOKIE['PHPSESSID']) ) {
 			$this->session_id = $_COOKIE['PHPSESSID'];
-		} else {
+		} elseif( isset($this->session) ) {
 			$this->session_id = $this->session->userdata('phpsessid');
 		}
 		parent::Model();
@@ -37,30 +37,28 @@ class Admin extends Model {
 						}
 						setcookie('PHPSESSID', $cookie['value'],$cookie['expires'],$cookie['path']);
 						$this->session->set_userdata('phpsessid', $cookie['value']);
+						$this->session_id = $cookie['value'];
 						xcache_unset("session:{$session_id}:admin-userinfo");
 						break;
 					}
 				}
 			}
+			xcache_unset("session:{$session_id}:album-access");
 			return $success;
 		}
 
 	}
 
 	public function logout() {
-		if( isset($_COOKIE['PHPSESSID']) ) {
-			$session_id = $_COOKIE['PHPSESSID'];
-		} else {
-			$session_id = $this->session->userdata('phpsessid');
-		}
 		$req =& new HTTP_Request("http://localhost/admin/ajax_session/logout");
 		$req->setMethod(HTTP_REQUEST_METHOD_GET);
-		$req->addCookie("PHPSESSID", $session_id);
+		$req->addCookie("PHPSESSID", $this->session_id);
 		$response = $req->sendRequest();
 		if (PEAR::isError($response)) {
 			return false;
 		} else {
-			xcache_unset("session:{$session_id}:admin-userinfo");
+			xcache_unset("session:{$this->session_id}:admin-userinfo");
+			xcache_unset("session:{$this->session_id}:album-access");
 			$this->session->sess_destroy();
 			return true;
 		}		
@@ -82,12 +80,10 @@ class Admin extends Model {
 	public function get_userinfo( $force = false ) {
 		if( $force ) {
 			$session_id = $force;
-		} elseif( isset($_COOKIE['PHPSESSID']) ) {
-			$session_id = $_COOKIE['PHPSESSID'];
 		} else {
-			$session_id = $this->session->userdata('phpsessid');
+			$session_id = $this->session_id;
 		}
-		if( $session_id ) {
+		if( $session_id && $this->has_album_access() ) {
 			if(!xcache_isset("session:{$session_id}:admin-userinfo")) {
 				$list = $this->_get_userinfo($session_id);
 				xcache_set("session:{$session_id}:admin-userinfo", $list, self::TTL);
@@ -185,12 +181,39 @@ class Admin extends Model {
 		}
 
 	}
+	private function _has_album_access() {
+		$req =& new HTTP_Request("http://localhost/admin/ajax_session/policy");
+		$req->setMethod(HTTP_REQUEST_METHOD_POST);
+		$req->addCookie("PHPSESSID", $this->session_id);
+		$req->addPostData('policy', 'album');
+		$req->addPostData('method', 'access');
+		$response = $req->sendRequest();
+		if (PEAR::isError($response)) {
+			return false;
+		} else {
+			$decoded = json_decode($req->getResponseBody(), true);
+			if( isset($decoded['success']) && !$decoded['success'] ) {
+				return true;
+			}
+			if( isset($decoded['valid']) && $decoded['valid'] ) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	public function has_album_access() {
+		if(!xcache_isset("session:{$this->session_id}:album-access")) {
+			$access = $this->_has_album_access();
+			xcache_set("session:{$this->session_id}:album-access", $access, self::TTL);
+		}
+		return xcache_get("session:{$this->session_id}:album-access");
+	}
+
 	public function has_manager_access() {
 		$userinfo = $this->get_userinfo();
 		return
-			isset( $userinfo['logged_in'], $userinfo['groups']['bubba'] ) &&
-			$userinfo['logged_in'] && 
-			$userinfo['groups']['bubba'];
+			$this->has_album_access() && isset( $userinfo['groups']['bubba'] ) && $userinfo['groups']['bubba'];
 
 	}
 }

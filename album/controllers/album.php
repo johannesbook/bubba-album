@@ -9,6 +9,12 @@ class Album extends Controller {
 	function json() {
 		$this->load->model("Album_model");
 		$this->load->model('admin');
+		header("Content-type: application/json");
+		$has_access = $this->admin->has_album_access();
+		if(!$has_access) {
+			echo json_encode(array("error" => "access_denied"));
+			return;
+		}
 		$userinfo = $this->admin->get_userinfo();
 
 		$album = json_decode($this->input->post('path'));
@@ -60,7 +66,6 @@ class Album extends Controller {
 		$data['meta'] = $meta;
 		$data['root'] = $album;
 
-		header("Content-type: application/json");
 		echo json_encode( $data );
 		return;
 
@@ -70,6 +75,7 @@ class Album extends Controller {
 		$this->load->model('admin');
 
 		//$this->admin->login('test','test');
+		$has_access = $this->admin->has_album_access();
 		$userinfo = $this->admin->get_userinfo();
 		$data['manager_access'] = $this->admin->has_manager_access();
 		$albums = $this->Album_model->get_albums(null, $userinfo['username'], $this->session->userdata('manager_mode') && $data['manager_access']);
@@ -78,6 +84,7 @@ class Album extends Controller {
 		$this->layout->setLayout('album_layout', array(
 			'title' => "BUBBA PHOTO GALLERY", 
 			'userinfo' => $userinfo,
+			'has_access' => $has_access,
 			'head' => $this->load->view('album_index_head_view',$data,true) 
 		));
 		$this->layout->view('album_index_view', $data);

@@ -5,6 +5,7 @@ $lang= array(
 	"topnav-authorized-album" => "Viewing album as '%s'",
 	"topnav-authorized" => "Logged in as '%s'",
 	"topnav-not-authorized" => "Viewing album anonymously",
+	"topnav-access-denied" => "Access denied",
 	"topnav-logout" => "Logout",
 	"topnav-home" => "Home",
 	"topnav-settings" => "Administration",

@@ -31,7 +31,8 @@
 config = <?=json_encode(
 	array(
 		'prefix' => site_url(),
-		'userinfo' => $userinfo
+		'userinfo' => $userinfo,
+		'has_access' => $has_access,
 )
 )?>;
 manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
@@ -70,8 +71,14 @@ function postlogin_callback() {
 				$(self).dialog('close');
 				$(self).dialog('destroy');
 				config.userinfo = data.userinfo;
+				var old_has_access = config.has_access;
+				config.has_access = data.has_access;
 				update_topnav_status();
-				update_manager_mode();
+				if( config.has_access && old_has_access ) {
+					update_manager_mode();
+				} else {
+					window.location.reload();
+				}
 				$.event.trigger('auth_changed');
 			}
 		},"json");
@@ -87,6 +94,9 @@ function postlogout_callback( event, ui ) {
 			$(self).dialog('close');
 			$(self).dialog('destroy');
 			config.userinfo = data.userinfo;
+			if(!config.has_access) {
+					window.location.reload();
+			}
 			update_topnav_status();
 			update_manager_mode();
 			$.event.trigger('auth_changed');
@@ -135,6 +145,7 @@ function dialog_login(e) {
 			close : dialog_loginclose_callback
 		}
 	);
+	$('#fn-login-username').focus();
 
 return false;
 }
@@ -164,9 +175,17 @@ $(function(){
 			dialog_login();
 		}
 	});
+	$('#fn-topnav-home').click(function(){ window.location.href = "/admin" });
+	$("#fn-login-dialog-form input").keypress(function(e) {
+		if( e.which == $.ui.keyCode.ENTER ) {
+			$("#fn-login-dialog-button").trigger('click');
+			return false;
+		}
+		return true;
+	});			
 });
 </script>
-<?if($head):?>
+<?if($has_access && $head):?>
 <?=$head?>
 <?endif?>
 </head>
@@ -181,6 +200,7 @@ $(function(){
 		<div id="topnav-content-inner">
 				<span id="topnav_status">
 	
+			<?if($has_access):?>
 			<?if ($userinfo['logged_in']): ?>
 			<?if(isset($userinfo['groups']['bubba'])):?>
 				<?=t("topnav-authorized-bubba",$userinfo['realname'])?>
@@ -191,6 +211,9 @@ $(function(){
 			<?endif?>
 			<?else :?>
 	            <?=t("topnav-not-authorized")?>
+			<?endif?>
+			<?else :?>
+	            <?=t("topnav-access-denied")?>
 			<?endif?>
         </span>
             <button id="fn-topnav-logout" class="ui-button" role="button" aria-disabled="false"><div class="ui-icons ui-icon-logout"></div><div id="s-topnav-logout" class="ui-button-text"><?=t("topnav-logout")?></div></button>
@@ -211,7 +234,9 @@ $(function(){
 
             </div>	<!-- header -->		
             <div id="content">
+			<?if($has_access):?>
 				<?=$content_for_layout?>
+			<?endif?>
             </div>	<!-- content -->
             
     		<div id="update_status" class="ui-corner-all ui-state-highlight ui-helper-hidden"></div>
@@ -223,13 +248,14 @@ $(function(){
 <div id="layout-templates" class="ui-helper-hidden">
 
 <div id="div-login-dialog">
-<form method="post" class="ui-form-login-dialog" id="fn-login-dialog-form">
+<form class="ui-form-login-dialog" id="fn-login-dialog-form">
 	<h2 class="ui-text-center"><?=t('login-dialog-header')?></h2>
 	<table>
 		<tr>
 			<td>
-				<label for="username"><?=t("Username")?>:</label><br>
+				<label for="fn-login-username"><?=t("Username")?>:</label><br>
 				<input
+					id="fn-login-username"
 					type="text" 
 					name="username"
 					class="ui-input-text"
@@ -238,8 +264,9 @@ $(function(){
 		</tr>
 		<tr>
 			<td>
-				<label for="password"><?=t("Password")?>:</label><br>
+				<label for="fn-login-password"><?=t("Password")?>:</label><br>
 				<input
+					id="fn-login-password"
 					type="password" 
 					name="password"
 					class="ui-input-text"
