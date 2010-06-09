@@ -1,3 +1,10 @@
+bubba-album (2.0.0.6) lucid; urgency=low
+
+  * 
+  * Switch to dpkg-source 3.0 (native) format
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 09 Jun 2010 15:33:03 +0200
+
 bubba-album (2.0.0.5) claire; urgency=low
 
   * initial new style 
