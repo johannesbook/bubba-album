@@ -5,17 +5,17 @@
 /usr/share/web-admin/admin/views/default/_css/jquery.ui.theme.default.css /usr/share/album/views/_css/jquery.ui.theme.default.css
 /usr/share/web-admin/admin/views/default/_css/admin.css /usr/share/album/views/_css/admin.css
 
-/usr/share/web-admin/admin/views/default/_img/icons_home.png /usr/share/album/views/default/_img/icons_home.png
-/usr/share/web-admin/admin/views/default/_img/icons.png /usr/share/album/views/default/_img/icons.png
-/usr/share/web-admin/admin/views/default/_img/logo.png /usr/share/album/views/default/_img/logo.png
-/usr/share/web-admin/admin/views/default/_img/spinner_black32.png /usr/share/album/views/default/_img/spinner_black32.png
+/usr/share/web-admin/admin/views/default/_img/icons_home.png /usr/share/album/views/_img/icons_home.png
+/usr/share/web-admin/admin/views/default/_img/icons.png /usr/share/album/views/_img/icons.png
+/usr/share/web-admin/admin/views/default/_img/logo.png /usr/share/album/views/_img/logo.png
+/usr/share/web-admin/admin/views/default/_img/spinner_black32.png /usr/share/album/views/_img/spinner_black32.png
 
-/usr/share/web-admin/admin/views/default/_js/jquery.ba-serializeobject.js /usr/share/album/views/default/_js/jquery.ba-serializeobject.js
-/usr/share/web-admin/admin/views/default/_js/jquery.dataTables.js /usr/share/album/views/default/_js/jquery.dataTables.js
-/usr/share/web-admin/admin/views/default/_js/jquery.js /usr/share/album/views/default/_js/jquery.js
-/usr/share/web-admin/admin/views/default/_js/jquery.sprintf.js /usr/share/album/views/default/_js/jquery.sprintf.js
-/usr/share/web-admin/admin/views/default/_js/jquery.ui.dialog.js /usr/share/album/views/default/_js/jquery.ui.dialog.js
-/usr/share/web-admin/admin/views/default/_js/jquery.ui.filemanager.js /usr/share/album/views/default/_js/jquery.ui.filemanager.js
-/usr/share/web-admin/admin/views/default/_js/jquery-ui.js /usr/share/album/views/default/_js/jquery-ui.js
-/usr/share/web-admin/admin/views/default/_js/jquery.validate.js /usr/share/album/views/default/_js/jquery.validate.js
+/usr/share/web-admin/admin/views/default/_js/jquery.ba-serializeobject.js /usr/share/album/views/_js/jquery.ba-serializeobject.js
+/usr/share/web-admin/admin/views/default/_js/jquery.dataTables.js /usr/share/album/views/_js/jquery.dataTables.js
+/usr/share/web-admin/admin/views/default/_js/jquery.js /usr/share/album/views/_js/jquery.js
+/usr/share/web-admin/admin/views/default/_js/jquery.sprintf.js /usr/share/album/views/_js/jquery.sprintf.js
+/usr/share/web-admin/admin/views/default/_js/jquery.ui.dialog.js /usr/share/album/views/_js/jquery.ui.dialog.js
+/usr/share/web-admin/admin/views/default/_js/jquery.ui.filemanager.js /usr/share/album/views/_js/jquery.ui.filemanager.js
+/usr/share/web-admin/admin/views/default/_js/jquery-ui.js /usr/share/album/views/_js/jquery-ui.js
+/usr/share/web-admin/admin/views/default/_js/jquery.validate.js /usr/share/album/views/_js/jquery.validate.js
 

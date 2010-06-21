@@ -1,22 +1,22 @@
 <?php
 
 function get_thumb_path( $id ) {
-		$CI =& get_instance();
+		$CI = get_instance();
 		return $CI->config->item('thumbs_path')."/thumbs/$id";
 }
 
 function get_rescaled_path( $id ) {
-		$CI =& get_instance();
+		$CI = get_instance();
 		return $CI->config->item('thumbs_path')."/rescaled/$id";
 }
 
 function get_image_path( $path ) {
-		$CI =& get_instance();
+		$CI = get_instance();
 		return $CI->config->item('image_path')."/$path";
 }
 
 function create_thumb( $orig, $target ) {
-		$CI =& get_instance();
+		$CI = get_instance();
 		$width = $CI->config->item('thumb_width');
 		$height = $CI->config->item('thumb_height');
 		$mod_width = $width * 1.2;
@@ -33,7 +33,7 @@ function create_thumb( $orig, $target ) {
 }
 
 function create_rescaled( $orig, $target ) {
-		$CI =& get_instance();
+		$CI = get_instance();
 		$width = $CI->config->item('rescaled_width');
 
 
@@ -51,7 +51,7 @@ function cache_control( $file ) {
 		}
 		$last_modified_time = filemtime($file);
 
-		$CI =& get_instance();
+		$CI = get_instance();
 		$CI->output->set_header("Last-Modified: ".gmdate("D, d M Y H:i:s", $last_modified_time)." GMT");
 
 		if (

@@ -9,7 +9,7 @@ class Layout
     
     function Layout($layout = "layout_main")
     {
-        $this->obj =& get_instance();
+        $this->obj = get_instance();
         $this->layout = $layout;
     }
 

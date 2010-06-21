@@ -14,7 +14,7 @@ class Admin extends Model {
 
 	public function login($username, $password) {
 		$this->load->helper('cookie');
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/login");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/login");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addPostData('username', $username);
 		$req->addPostData('password', $password);
@@ -50,7 +50,7 @@ class Admin extends Model {
 	}
 
 	public function logout() {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/logout");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/logout");
 		$req->setMethod(HTTP_REQUEST_METHOD_GET);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$response = $req->sendRequest();
@@ -65,7 +65,7 @@ class Admin extends Model {
 	}
 
 	private function _get_userinfo($session_id) {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/get_userinfo");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/get_userinfo");
 		$req->setMethod(HTTP_REQUEST_METHOD_GET);
 		$req->addCookie("PHPSESSID", $session_id);
 		$response = $req->sendRequest();
@@ -99,7 +99,7 @@ class Admin extends Model {
 		return $userinfo['logged_in'];
 	}
 	public function modify_user( $username, $realname, $password ) {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/modify_user");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/modify_user");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('username', $username);
@@ -117,7 +117,7 @@ class Admin extends Model {
 	}
 
 	public function add_user( $username, $realname, $password ) {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/add_user");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/add_user");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('username', $username);
@@ -137,7 +137,7 @@ class Admin extends Model {
 	
 
 	public function del_user( $username ) {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/del_user");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/del_user");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('username', $username);
@@ -152,7 +152,7 @@ class Admin extends Model {
 	}	
 
 	public function user_exists( $username ) {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/user_exists");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/user_exists");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('username', $username);
@@ -167,7 +167,7 @@ class Admin extends Model {
 	}	
 
 	public function get_album_users() {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/list_users");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/list_users");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('group', 'album');
@@ -182,7 +182,7 @@ class Admin extends Model {
 
 	}
 	private function _has_album_access() {
-		$req =& new HTTP_Request("http://localhost/admin/ajax_session/policy");
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/policy");
 		$req->setMethod(HTTP_REQUEST_METHOD_POST);
 		$req->addCookie("PHPSESSID", $this->session_id);
 		$req->addPostData('policy', 'album');
