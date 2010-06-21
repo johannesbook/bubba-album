@@ -32,14 +32,6 @@ CREATE TABLE `album` (
   CONSTRAINT `album_parent_id` FOREIGN KEY (`parent`) REFERENCES `album` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `exif` (
-  `image` mediumint(9) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `value` text,
-  KEY `image` (`image`),
-  CONSTRAINT `exif_image_id` FOREIGN KEY (`image`) REFERENCES `image` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `image` (
   `id` mediumint(9) NOT NULL auto_increment,
   `path` varchar(4096) NOT NULL COMMENT 'The path to the file in question',
@@ -52,6 +44,14 @@ CREATE TABLE `image` (
   KEY `album` (`album`),
   CONSTRAINT `image_album_id` FOREIGN KEY (`album`) REFERENCES `album` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE `exif` (
+  `image` mediumint(9) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` text,
+  KEY `image` (`image`),
+  CONSTRAINT `exif_image_id` FOREIGN KEY (`image`) REFERENCES `image` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `sessions` (
   `session_id` varchar(40) NOT NULL default '0',
