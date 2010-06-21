@@ -1,3 +1,9 @@
+bubba-album (2.1~pre3) vincent; urgency=low
+
+  * remove Auth.php as it's not used any more 
+
+ -- Carl Fürstenberg <carl@excito.com>  Mon, 21 Jun 2010 15:20:05 +0200
+
 bubba-album (2.1~pre2) vincent; urgency=low
 
   * fix php 5.3 changes, and wrong linking paths 
