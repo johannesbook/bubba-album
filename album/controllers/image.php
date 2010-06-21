@@ -2,7 +2,6 @@
 class Image extends Controller {
 	function __construct() {
 		parent::Controller();
-		$this->load->library('Auth');
 	}
 	function index() {
 	}

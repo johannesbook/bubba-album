@@ -1,3 +1,9 @@
+bubba-album (2.1~pre4) vincent; urgency=low
+
+  * remove includes 
+
+ -- Carl Fürstenberg <carl@excito.com>  Mon, 21 Jun 2010 15:26:30 +0200
+
 bubba-album (2.1~pre3) vincent; urgency=low
 
   * remove Auth.php as it's not used any more 

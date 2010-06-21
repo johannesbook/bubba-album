@@ -2,7 +2,6 @@
 class Album extends Controller {
 	function __construct() {
 		parent::Controller();
-		$this->load->library('Auth'); 
 		$this->load->helper('i18n');
 		load_lang('en');
 	}
