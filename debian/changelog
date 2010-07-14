@@ -1,3 +1,9 @@
+bubba-album (2.1~pre5) vincent; urgency=low
+
+  * force correct owneership of var lib dirs 
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 14 Jul 2010 17:02:33 +0200
+
 bubba-album (2.1~pre4) vincent; urgency=low
 
   * remove includes 
