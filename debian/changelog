@@ -1,3 +1,9 @@
+bubba-album (2.1~pre6) vincent; urgency=low
+
+  * make sure cache directory is correct chowned and chodded
+
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 27 Jul 2010 15:37:45 +0200
+
 bubba-album (2.1~pre5) vincent; urgency=low
 
   * force correct owneership of var lib dirs 
