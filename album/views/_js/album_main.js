@@ -68,7 +68,7 @@ copymove_callback = function(type) {
 	var albums = albummanager_obj.albummanager('getSelectedAlbums');
 	var images = albummanager_obj.albummanager('getSelectedImages');
 
-	var speed = 750;
+	var speed = 5000;
 
 	copymove_isactive = true;
 	albummanager_obj.albummanager('disableButtons');
