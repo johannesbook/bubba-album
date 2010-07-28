@@ -68,7 +68,7 @@ copymove_callback = function(type) {
 	var albums = albummanager_obj.albummanager('getSelectedAlbums');
 	var images = albummanager_obj.albummanager('getSelectedImages');
 
-	var speed = 5000;
+	var speed = 750;
 
 	copymove_isactive = true;
 	albummanager_obj.albummanager('disableButtons');
@@ -574,7 +574,7 @@ var after_draw_images_callback = function() {
 	} else {
 		$('a[rel=fn-image]').colorbox({
 				'photo': true,
-				'slideshowSpeed': 1000,
+				'slideshowSpeed': 5000,
 				'slideshow': true,
 				'slideshowAuto': false,
 				'title': colorbox_title
