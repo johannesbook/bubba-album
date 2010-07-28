@@ -1,8 +1,9 @@
 bubba-album (2.1~pre9) vincent; urgency=low
 
   * slowing down to ⅕Hz for album slideshow
+  * fix epty space in colorbox popup 
 
- -- Carl Fürstenberg <carl@excito.com>  Wed, 28 Jul 2010 17:23:21 +0200
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 28 Jul 2010 17:29:36 +0200
 
 bubba-album (2.1~pre8) vincent; urgency=low
 

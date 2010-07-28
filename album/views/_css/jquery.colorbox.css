@@ -29,8 +29,8 @@
 #cboxBottomRight{width:25px; height:25px; background:url(../_img/colorbox/border1.png) -25px -25px no-repeat;}
 #cboxMiddleLeft{width:25px; background:url(../_img/colorbox/border2.png) 0 0 repeat-y;}
 #cboxMiddleRight{width:25px; background:url(../_img/colorbox/border2.png) -25px 0 repeat-y;}
-#cboxContent{background:#fff; padding-top: 25px;}
-#cboxLoadedContent{margin-bottom:20px;}
+#cboxContent{background:#fff;}
+#cboxLoadedContent{margin-bottom:20px; margin-top: 20px;}
 #cboxTitle{position:absolute; top:0; left:0; text-align:center; width:100%; color:#000;}
 #cboxViewOriginal{position:absolute; top:0; left:0;}
 #cboxTitleTitle{font-size: larger;}
