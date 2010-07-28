@@ -36,6 +36,7 @@ config = <?=json_encode(
 )
 )?>;
 manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
+section_stack = [];
 </script>
 
 <script>
@@ -167,7 +168,48 @@ function dialog_logout() {
 }
 
 $(function(){
-	
+	$.each( $.browser, function( key, value ) {
+		if( value && key !== 'version' ) {
+			$('body').addClass(key);
+		}
+	});
+
+	$("#fn-topnav-help").click( function() {
+		if(!$(".ui-help-box").is(":visible")) {
+			if( config.userinfo.logged_in ) {
+				if( manager_mode ) {
+					prefix = 'manager';
+				} else {
+					prefix = 'user';
+				}
+				if( section_stack.length == 0 ) {
+					section = 'main';
+				} else {
+					section = section_stack[section_stack.length - 1];
+				}
+				entry = prefix + "::" + section;
+
+			} else {
+				entry = 'anon::main';
+			}
+			content = $('#fn-help-dialog').clone().appendTo('body');
+			content
+				.find('.ui-help-dialog-content')
+				.html($.message("help-info::" + entry));
+
+			$.dialog(
+				content.show(),
+				$.message('help-box-header'),
+				{},
+				{
+					'modal' : false, 
+					dialogClass : "ui-help-box", 
+					position : ['right','top']
+				}
+			);
+		};
+	});
+
 	$('#fn-topnav-logout').click(function(event) {
 		if( config.userinfo && config.userinfo.logged_in ) {
 			dialog_logout();
@@ -279,8 +321,20 @@ $(function(){
 			<?=t('login-error-pwd')?>
 		</div>
 	</div>
+
 </form>
 </div>
+	<div id="fn-help-dialog" class="ui-help-dialog ui-helper-hidden">
+		<div class="ui-help-dialog-content"></div>
+		<div class='help-box-further-info'></div>
+		<div class='help-box-external-links'>
+			<div class='help-box-external-link'>
+				<a target='_blank' href='/manual/'><?=t('help-box-manual-link')?></a> |
+				<a target='_blank' href='http://forum.excito.net/index.php'><?=t('help-box-forum-link')?></a> | 
+				<a target='_blank' href='http://www.excito.com'><?=t('help-box-excito-link')?></a></div>
+			</div>
+		</div>				
+	</div>
 
 </div>
 </body>

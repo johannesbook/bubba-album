@@ -32,7 +32,13 @@ messages = {
 	"albummanager-label-public": "Allow anonymous access?",
 	"albummanager-label-recursive": "Apply permissions recursive?",
 	"album-users-entry":"%s (%s)",
-	"album-users-delete-message": "Are you really sure you want to delete the user <strong>%s</strong> a.k.a. \"%s\"?"
+	"album-users-delete-message": "Are you really sure you want to delete the user <strong>%s</strong> a.k.a. \"%s\"?",
+
+	/* Help messages */
+	"help-box-header" : "Bubba Album help",
+	"help-info::anon::main": "Click on login to login etc...",
+	"help-info::user::main": "Click on manager button to enter manager mode...",
+	"help-info::manager::main": "Add a new album by clicking on the add new album button..."
 
 
 

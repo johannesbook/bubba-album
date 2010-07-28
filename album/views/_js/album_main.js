@@ -8,6 +8,18 @@ var update_manager_access = function() {
 	}
 	$('.ui-manager-access').button(manager_access ? 'enable': 'disable');
 }
+var colorbox_title = function() {
+	var title = $(this).attr('title');
+	var view_url = $(this).attr('href').replace('medium', 'view');
+	var download_url = $(this).attr('href').replace('medium', 'download');
+	var nodes = $([]);
+	nodes = nodes.add($('<a/>', { 'href': view_url, 'target': '_blank', 'text': 'view original', 'id': 'cboxViewOriginal'}));
+	nodes = nodes.add($('<span/>', { 'text': title, 'id': 'cboxTitleTitle'}));
+	nodes = nodes.add($('<a/>', { 'href': download_url, 'target': '_blank', 'text': 'download original', 'id': 'cboxDownloadOriginal'}));
+	
+	return nodes;
+}
+
 
 
 var update_manager_mode_no_reload = function() {
@@ -18,6 +30,7 @@ var update_manager_mode_no_reload = function() {
 				'photo': true,
 				'slideshow': true,
 				'slideshowAuto': false,
+				'title': colorbox_title,
 				'open': false
 			}
 		);
@@ -530,6 +543,7 @@ var buttons = [{
 					'photo': true,
 					'slideshow': true,
 					'slideshowAuto': true,
+					'title': colorbox_title,
 					'open': true
 				}
 			);
@@ -538,6 +552,7 @@ var buttons = [{
 							'photo': true,
 							'slideshow': true,
 							'slideshowAuto': false,
+							'title': colorbox_title,
 							'open': false
 						}
 					);
@@ -562,11 +577,7 @@ var after_draw_images_callback = function() {
 				'slideshowSpeed': 1000,
 				'slideshow': true,
 				'slideshowAuto': false,
-				'title': function() {
-					var view_url = $(this).attr('href').replace('medium', 'view');
-					var download_url = $(this).attr('href').replace('medium', 'download');
-					return '<a href="' + view_url + '" target="_blank">view original</a> <a href="' + download_url + '" target="_blank">download original</a>';
-				}
+				'title': colorbox_title
 			}
 		);
 	}

@@ -1,5 +1,9 @@
 <?php
 $lang= array(
+	"help-box-manual-link" => "Bubba Manual",
+	"help-box-forum-link" => "Forum",
+	"help-box-excito-link" => "Excito web site",
+	"help-box-further-info" => "Additional resources",
 	"username-exists" => "The username <em>%s</em> allready exists, try <em>%1\$s_01</em> instead",
 	"topnav-authorized-bubba" => "Logged in as bubba user '%s'",
 	"topnav-authorized-album" => "Viewing album as '%s'",

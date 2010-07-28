@@ -1,3 +1,10 @@
+bubba-album (2.1~pre7) vincent; urgency=low
+
+  * Help system
+  * update colorbox, and fix placement of title
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 28 Jul 2010 02:51:42 +0200
+
 bubba-album (2.1~pre6) vincent; urgency=low
 
   * make sure cache directory is correct chowned and chodded

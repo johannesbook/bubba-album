@@ -28,7 +28,6 @@ class Add extends Controller {
 
 			$data = array();
 			print json_encode($data);
-			$userinfo = $this->admin->get_userinfo();
 		}
 }
 
