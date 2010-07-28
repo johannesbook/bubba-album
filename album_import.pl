@@ -6,6 +6,7 @@ package Bubba::Album;
 use DBI;
 use Image::ExifTool;
 use File::Basename;
+use List::Util qw(max);
 
 use Perl6::Say;
 use JSON;
@@ -22,8 +23,8 @@ $VERSION = '0.0.1';
 
 use constant SOCKNAME		=> "/tmp/bubba-album.socket";
 use constant PIDFILE		=> '/tmp/bubba-album.pid';
-use constant THUMB_WIDTH	=> 80;
-use constant THUMB_HEIGHT	=> 60;
+use constant THUMB_WIDTH	=> 100;
+use constant THUMB_HEIGHT	=> 100;
 use constant SCALE_WIDTH	=> 600;
 use constant CACHE_PATH		=> '/var/lib/album/thumbs';
 use constant THUMB_PATH		=> CACHE_PATH . '/thumbs';
@@ -158,8 +159,12 @@ sub _process_thumb_work_queue {
 
 		system( 
 			"epeg",
-			"-w ".THUMB_WIDTH,
-			"-h ".THUMB_HEIGHT,
+			"-w",
+			THUMB_WIDTH,
+			"-h",
+			THUMB_HEIGHT,
+			"-w",
+			max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
 			$current->{file},
 			THUMB_PATH . "/$current->{id}"
 		);

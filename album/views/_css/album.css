@@ -1,3 +1,36 @@
+.ui-album-icons {
+  background-image: url(../_img/icons_album.png)!important;
+}
+.ui-album-icon-create {
+  background-position: -5px -6px;
+  height: 29px;
+  width: 37px;	
+}
+
+.ui-album-icon-add {
+  background-position: -42px -6px;
+  height: 29px;
+  width: 37px;	
+}
+
+.ui-album-icon-person {
+  background-position: -79px -6px;
+  height: 29px;
+  width: 37px;	
+}
+
+.ui-album-icon-manage {
+  background-position: -5px -87px;
+  height: 29px;
+  width: 37px;	
+}
+
+.ui-album-icon-slideshow {
+  background-position: -42px -87px;
+  height: 29px;
+  width: 37px;	
+}
+
 #albumtable_processing
 {
 	display:inline;
@@ -479,3 +512,4 @@ table.ui-album-usertable thead
 	width: 100%;
 	text-align: right;
 }
+

@@ -429,7 +429,7 @@ var buttons = [{
 		'class': 'ui-manager-access',
 		'disabled': ! manager_access,
 		'manager': true,
-		'type': 'ui-icons ui-icon-plusthick',
+		'type': 'ui-icons ui-album-icons ui-album-icon-create',
 		'alt': 'Create album',
 		'callback': function() {
 			$("#fn-albummanager-create").formwizard('reset');
@@ -451,7 +451,7 @@ var buttons = [{
 		'class': 'ui-manager-access',
 		'disabled': ! manager_access,
 		'manager': true,
-		'type': 'ui-icons ui-icon-upload',
+		'type': 'ui-icons ui-album-icons ui-album-icon-add',
 		'alt': 'Add images',
 		'callback': function() {
 			dialogs["add"].find(".fn-placeholder-filemanager").append(filemanager_obj.parent());
@@ -503,7 +503,7 @@ var buttons = [{
 		'class': 'ui-manager-access',
 		'disabled': ! manager_access,
 		'manager': true,
-		'type': 'ui-icons ui-icon-album',
+		'type': 'ui-icons ui-album-icons ui-album-icon-person',
 		'alt': 'Manage users',
 		'callback': function() {
 			dialogs["users"].dialog("open");
@@ -524,7 +524,7 @@ var buttons = [{
 		'id': 'fn-albummanager-button-manage',
 		'class': 'ui-manager-access',
 		'disabled': ! manager_access,
-		'type': 'ui-icons ui-icon-pencil',
+		'type': 'ui-icons ui-album-icons ui-album-icon-manage',
 		'alt': 'Manager mode',
 		'callback': function() {
 			manager_mode = ! manager_mode;
@@ -536,7 +536,7 @@ var buttons = [{
 	{
 		'id': 'fn-albummanager-button-slideshow',
 		'disabled': false,
-		'type': 'ui-icons ui-icon-move',
+		'type': 'ui-icons ui-album-icons ui-album-icon-slideshow',
 		'alt': 'Run slideshow',
 		'callback': function() {
 			$("a[rel='fn-image']").colorbox('destroy').colorbox({

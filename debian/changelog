@@ -1,3 +1,10 @@
+bubba-album (2.1~pre8) vincent; urgency=low
+
+  * adding album images (Closes: #1480)
+  * fix album_import.pl to create correct images
+
+ -- Carl Fürstenberg <carl@excito.com>  Wed, 28 Jul 2010 17:13:55 +0200
+
 bubba-album (2.1~pre7) vincent; urgency=low
 
   * Help system
