@@ -10,10 +10,12 @@ class Album extends Controller {
 		$this->load->model('admin');
 		header("Content-type: application/json");
 		$has_access = $this->admin->has_album_access();
+/*
 		if(!$has_access) {
 			echo json_encode(array("error" => "access_denied"));
 			return;
 		}
+*/
 		$userinfo = $this->admin->get_userinfo();
 
 		$album = json_decode($this->input->post('path'));
@@ -77,6 +79,10 @@ class Album extends Controller {
 		$has_access = $this->admin->has_album_access();
 		$userinfo = $this->admin->get_userinfo();
 		$data['manager_access'] = $this->admin->has_manager_access();
+		if(! $has_access) {
+			$userinfo['username'] = "";
+			$has_access = true;
+		}
 		$albums = $this->Album_model->get_albums(null, $userinfo['username'], $this->session->userdata('manager_mode') && $data['manager_access']);
 		$data['albums'] = $albums;
 

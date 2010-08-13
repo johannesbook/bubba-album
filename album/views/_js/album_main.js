@@ -1,5 +1,16 @@
 var albummanager_obj, filemanager_obj;
 
+var iCheckbox_options = {
+	switch_container_src: '/_img/bubba_switch_container.png',
+	class_container: 'ui-icon-bubba-switch-container',
+	class_switch: 'ui-icon-bubba-switch',
+	switch_speed: 50,
+	switch_swing: -65,
+	checkbox_hide: true,
+	switch_height: 21,
+	switch_width: 127
+};
+
 var update_manager_access = function() {
 	manager_access = config.userinfo && config.userinfo.groups && 'bubba' in config.userinfo.groups;
 	if (!manager_access && manager_mode) {
@@ -291,16 +302,22 @@ var dialog_pre_open_callbacks = {
 				table.empty();
 				$.each(data.users, function() {
 						var row = $('<tr/>');
+						var cell = $('<td/>');
 						var input_element = $('<input/>', {
 								'name': 'users',
 								'type': 'checkbox',
+								'class': 'slide',
 								'value': this.username,
-								'checked': this.access
+								'checked': this.access,
+								'id': 'fn-albummanager-perm-dialog-label' + this.username
 							}
 						);
 						table.append(row);
-						row.append($('<td/>', {
-									'html': this.realname + " (" + this.username + ")"
+						row.append(cell);
+						//cell.append($("<label for='fn-albummanager-perm-dialog-label'/>", {
+						cell.append($("<label/>", {
+									'html': this.realname + " (" + this.username + ")",
+									'for' : 'fn-albummanager-perm-dialog-label' + this.username
 								}
 							)
 						);
@@ -309,6 +326,11 @@ var dialog_pre_open_callbacks = {
 								}
 							)
 						);
+						input_element.iCheckbox( iCheckbox_options );
+						if(data.public) {
+							$("#fn-albummanager-perm-dialog .ui-album-usertable tbody :checkbox").attr( 'disabled', 'disabled');
+							$("#fn-albummanager-perm-dialog .ui-album-usertable tbody").addClass( 'ui-state-disabled');
+						}
 					}
 				);
 				$.throbber.hide();
@@ -666,6 +688,10 @@ var update_toobar_button_callback = function(album_count, image_count) {
 }
 
 $(function() {
+	
+		$(':input[type=checkbox].slide').iCheckbox( iCheckbox_options );
+
+
 		$(document).bind('auth_changed', function() {
 				update_manager_access();
 				return false;
@@ -733,6 +759,7 @@ $(function() {
 		$("#fn-albummanager-perm-public").bind('change', function(){
 				$("#fn-albummanager-perm-dialog .ui-album-usertable tbody :checkbox").attr( 'disabled', $(this).is(":checked") ? 'disabled': null);
 				$("#fn-albummanager-perm-dialog .ui-album-usertable tbody").toggleClass( 'ui-state-disabled', $(this).is(":checked") );
+				$("#fn-albummanager-perm-dialog .ui-album-usertable tbody tr td span div").toggleClass( 'ui-state-disabled', $(this).is(":checked") ); // why needed?
 			}
 		);		
 
@@ -751,6 +778,7 @@ $(function() {
 							var input_element = $('<input/>', {
 									'name': 'users[]',
 									'type': 'checkbox',
+									'class': 'slide',
 									'value': this.username,
 									'checked': $.inArray(this.username, checked) != - 1
 								}

@@ -117,7 +117,7 @@
 							<?=t('albummanager-label-public')?>
 							:</label> <input type="checkbox" id=
 						"fn-albummanager-create-public" name="public" class=
-						"" />
+						"slide" />
 					</div>
 
 					<div>
@@ -180,27 +180,42 @@
 		<h2><?=t('albummanager-perm-dialog-title')?>
 		</h2>
 
-		<div>
-			<label for="fn-albummanager-perm-public">
-				<?=t('albummanager-label-public')?>
-				:</label> <input type="checkbox" id=
-			"fn-albummanager-perm-public" name="public" class="" />
-		</div>
+		<table class="ui-table-outline ui-album-perm-public">
+			<tbody>
+			<tr>
+				<td>
+				<div>
+					<label for="fn-albummanager-perm-public">
+						<?=t('albummanager-label-public')?>
+						:</label>
+					</td>
+					<td>
+					<input type="checkbox" class="slide" id="fn-albummanager-perm-public" name="public" class="" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
 
-		<div>
-			<label for="fn-albummanager-perm-recursive">
-				<?=t('albummanager-label-recursive')?>
-				:</label> <input type="checkbox" id=
-			"fn-albummanager-perm-recursive" name="recursive" checked=
-			"checked" class="" />
-		</div>
+				<div>
+					<label for="fn-albummanager-perm-recursive">
+						<?=t('albummanager-label-recursive')?>
+						:</label>
+							</td>
+							<td>
+						<input type="checkbox" class="slide" id="fn-albummanager-perm-recursive" name="recursive" checked="checked" class="" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	</table>
 
 		<div>
 			<table class="ui-table-outline ui-album-usertable">
 				<thead>
 					<tr class=
 						"ui-state-default ui-widget-header ui-albummanager-header">
-						<td></td>
+						<td>User</td>
 
 						<td>Access allowed</td>
 					</tr>

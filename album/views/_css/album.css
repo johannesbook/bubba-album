@@ -394,6 +394,19 @@ table.ui-album-usertable
 	font-size:11px;
 	overflow:auto;
 	width:100%;
+	margin-top : 10px;
+}
+table.ui-album-perm-public
+{
+	border:1px solid #ccc;
+	border-collapse:collapse;
+	font-size:11px;
+	overflow:auto;
+	width:100%;
+	margin-top : 10px;
+}
+#fn-albummanager-perm-dialog table tbody tr td:first-child {
+	width : 75%;
 }
 
 table.ui-album-usertable tbody

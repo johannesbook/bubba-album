@@ -181,6 +181,13 @@ jQuery.widget("ui.albummanager", {
 							   );
 
 							   jQuery.throbber.hide();
+							   if($("#fn-images").children("a").length) {
+								$("#fn-albummanager-button-slideshow").removeClass("ui-state-disabled");
+								$("#fn-albummanager-button-slideshow").removeClass("ui-button-disabled");
+							   } else {
+								$("#fn-albummanager-button-slideshow").addClass("ui-state-disabled");
+								$("#fn-albummanager-button-slideshow").addClass("ui-button-disabled");
+							   }
 						   }
 					   } 
 				   );

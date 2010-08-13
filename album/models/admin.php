@@ -43,7 +43,9 @@ class Admin extends Model {
 					}
 				}
 			}
-			xcache_unset("session:{$session_id}:album-access");
+			if(isset($session_id))	{
+				xcache_unset("session:{$session_id}:album-access");
+			}
 			return $success;
 		}
 
@@ -90,7 +92,8 @@ class Admin extends Model {
 			}
 			return xcache_get("session:{$session_id}:admin-userinfo");
 		} else {
-			return array( 'groups' => array(), 'realname' => '', 'username' => '', 'logged_in' => false );
+			$list = $this->_get_userinfo($session_id);
+			return array( 'groups' => array(), 'realname' => '', 'username' => $list['username'], 'logged_in' => false );
 		}
 	}
 
@@ -203,6 +206,7 @@ class Admin extends Model {
 	}
 
 	public function has_album_access() {
+		if(! $this->session_id) return 1;
 		if(!xcache_isset("session:{$this->session_id}:album-access")) {
 			$access = $this->_has_album_access();
 			xcache_set("session:{$this->session_id}:album-access", $access, self::TTL);

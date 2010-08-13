@@ -7,16 +7,18 @@
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.theme.default.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/admin.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/album.css" />
-<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.throbber.css" />
+<? /*<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.throbber.css" /> */?>
 
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery-ui.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.ui.dialog.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.ui.throbber.js"></script>
-<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.validate.js"</script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.pubsub.js"></script>
 
 
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/main.js"></script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.iCheckbox.js" type="text/javascript"></script>
 
 <!-- Internationalization -->
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.sprintf.js"></script>
@@ -63,9 +65,9 @@ function postlogin_callback() {
 	$.post(config.prefix+'/login/json',
 	serial,
 		function(data){
-			if(data.authfail) {
+			if(!data.success) {
 				$("#fn-login-error-pwd").show();
-				$("#password").select();
+				$("#fn-login-password").select();
 				$("#fn-login-dialog-button").removeAttr('disabled');
 				$("#fn-login-dialog-button").removeClass("ui-state-disabled");
 			} else {
@@ -119,6 +121,8 @@ function update_topnav_status() {
 			topnav_status.html($.message("topnav-authorized", config.userinfo.realname));
 		}
 	} else {
+		$('#fn-topnav-logout div:first').removeClass("ui-icon-logout").addClass("ui-icon-login");
+		$('#s-topnav-logout').text($.message('topnav-login'));
 		topnav_status.html($.message("topnav-not-authorized"));
 	}
 }
@@ -174,6 +178,14 @@ $(function(){
 		}
 	});
 
+	$("#fn-topnav-help").mouseover(function(e) {		$("#s-topnav-help").show();	});	
+	$("#fn-topnav-help").mouseout(function(e) {		$("#s-topnav-help").hide();	});	
+	$("#fn-topnav-home").mouseover(function(e) {		$("#s-topnav-home").show();	});	
+	$("#fn-topnav-home").mouseout(function(e) {		$("#s-topnav-home").hide();	});	
+	$("#fn-topnav-logout").mouseover(function(e) {		$("#s-topnav-logout").show();	});	
+	$("#fn-topnav-logout").mouseout(function(e) {		$("#s-topnav-logout").hide();	});
+	update_topnav_status();
+	
 	$("#fn-topnav-help").click( function() {
 		if(!$(".ui-help-box").is(":visible")) {
 			if( config.userinfo.logged_in ) {
@@ -224,7 +236,16 @@ $(function(){
 			return false;
 		}
 		return true;
-	});			
+	});	
+	
+
+/*
+	// show dialog if the user does not have access
+	if(!config.has_access && config.userinfo.username) {
+		$("#fn-login-error-noaccess").show();
+		dialog_login();
+	}
+*/			
 });
 </script>
 <?if($has_access && $head):?>
@@ -276,9 +297,9 @@ $(function(){
 
             </div>	<!-- header -->		
             <div id="content">
-			<?if($has_access):?>
+			<?/*if($has_access):*/?>
 				<?=$content_for_layout?>
-			<?endif?>
+			<?/*endif*/?>
             </div>	<!-- content -->
             
     		<div id="update_status" class="ui-corner-all ui-state-highlight ui-helper-hidden"></div>
@@ -320,6 +341,9 @@ $(function(){
 		<div id="fn-login-error-pwd" class="ui-state-error-text ui-helper-hidden ui-login-dialog-error ui-text-center">
 			<?=t('login-error-pwd')?>
 		</div>
+		<div id="fn-login-error-noaccess" class="ui-state-error-text ui-helper-hidden ui-login-dialog-error ui-text-center">
+		<?=t('login-error-noaccess',$userinfo['username'])?>
+		</div>		
 	</div>
 
 </form>

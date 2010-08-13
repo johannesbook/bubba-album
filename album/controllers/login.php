@@ -10,7 +10,7 @@ class Login extends Controller {
 		$password = $this->input->post('password');
 		$this->load->model('admin');
 		$session_id = $this->admin->login($username,$password);
-		$data['success'] = !!$session_id;
+		$data['success'] = $session_id;
 		if( $session_id ) {
 			$data['userinfo'] = $this->admin->get_userinfo($session_id);
 		}
