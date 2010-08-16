@@ -11,6 +11,7 @@
 
 <script>
 
-manager_access=config.userinfo && config.userinfo.groups && 'bubba' in config.userinfo.groups;
+manager_access=config.userinfo && config.userinfo.groups.bubba;
+
 </script>
 <script src="<?=$this->config->item("base_url")?>/views/_js/album_main.js" type="text/javascript"></script>

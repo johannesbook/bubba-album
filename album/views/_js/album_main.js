@@ -12,7 +12,7 @@ var iCheckbox_options = {
 };
 
 var update_manager_access = function() {
-	manager_access = config.userinfo && config.userinfo.groups && 'bubba' in config.userinfo.groups;
+	manager_access = config.userinfo && config.userinfo.groups.bubba;
 	if (!manager_access && manager_mode) {
 		manager_mode = ! manager_mode;
 		update_manager_mode();

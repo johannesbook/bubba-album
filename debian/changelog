@@ -4,9 +4,11 @@ bubba-album (2.1~pre11) vincent; urgency=low
   * Fixed error message when trying to log in with incorrect pwd. (Closes: #1512)
   * Removed possibility to change permission for users when access is public (Closes: #1475)
   * Fixed tooltip on toplevel icons. (Closes: #1490)
-  * Todo, add missing links to iCheckbox and missing images 
+  * Disabled slideshow button if no images in album (Closes: #1479)
+  * Allowing 'admin' to view public albums, but not to enter manager mode. (Closes: #1478)
+ 
 
- -- PA Nilsson <pa@excito.com>  Fri, 13 Aug 2010 16:00:01 +0200
+ -- PA Nilsson <pa@excito.com>  Mon, 16 Aug 2010 13:51:25 +0200
 
 bubba-album (2.1~pre10) vincent; urgency=low
 

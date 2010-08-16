@@ -216,8 +216,7 @@ class Admin extends Model {
 
 	public function has_manager_access() {
 		$userinfo = $this->get_userinfo();
-		return
-			$this->has_album_access() && isset( $userinfo['groups']['bubba'] ) && $userinfo['groups']['bubba'];
+		return $this->has_album_access() && isset( $userinfo['groups']['bubba'] ) && $userinfo['groups']['bubba'];
 
 	}
 }

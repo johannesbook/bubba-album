@@ -13,7 +13,7 @@
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery-ui.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.ui.dialog.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.ui.throbber.js"></script>
-<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.validate.js"</script>
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.validate.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.pubsub.js"></script>
 
 
@@ -35,7 +35,7 @@ config = <?=json_encode(
 		'prefix' => site_url(),
 		'userinfo' => $userinfo,
 		'has_access' => $has_access,
-)
+	)
 )?>;
 manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
 section_stack = [];
@@ -120,6 +120,8 @@ function update_topnav_status() {
 		} else {
 			topnav_status.html($.message("topnav-authorized", config.userinfo.realname));
 		}
+		$('#fn-topnav-logout div:first').removeClass("ui-icon-login").addClass("ui-icon-logout");
+		$('#s-topnav-logout').text($.message('topnav-logout'));
 	} else {
 		$('#fn-topnav-logout div:first').removeClass("ui-icon-logout").addClass("ui-icon-login");
 		$('#s-topnav-logout').text($.message('topnav-login'));

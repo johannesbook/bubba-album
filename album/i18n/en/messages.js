@@ -7,6 +7,7 @@ messages = {
 	"topnav-authorized" : "Logged in as '%s'",
 	"topnav-not-authorized" : "Viewing album anonymously",
 	"topnav-login" : "Login",
+	"topnav-logout" : "Logout",
 	/* Log out */
 	"logout-dialog-title" : "Proceed with logout?",
 	"logout-dialog-message" : "",
