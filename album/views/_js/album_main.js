@@ -967,13 +967,28 @@ $(function() {
 				form.find("#fn-albummanager-users-edit-username").val(username);
 				$(form[0].realname).val(realname);
 				form[0].realname.focus();
-				form.find("#fn-albummanager-users-edit-cancel").button().click(function(){
-						$('#fn-albummanager-users-dialog-button-add').button("enable");
-						selected.removeClass('ui-albummanager-users-edit').html($.message("album-users-entry", realname, username));
-						$('#fn-albummanager-users-dialog').removeClass('ui-albummanager-edit-mode');
-					}
-				);
-				form.find("#fn-albummanager-users-edit-ok").button().click(function(){
+				form.find("#fn-albummanager-users-edit-cancel").button(
+					{
+						'text': false,
+						'icons': {
+							'primary': 'ui-icons ui-icon-close ui-corner-left'
+						}
+					}		
+					).click(function(){
+							$('#fn-albummanager-users-dialog-button-add').button("enable");
+							selected.removeClass('ui-albummanager-users-edit').html($.message("album-users-entry", realname, username));
+							$('#fn-albummanager-users-dialog').removeClass('ui-albummanager-edit-mode');
+						}
+					);
+				form.find("#fn-albummanager-users-edit-ok").button(
+						{
+							'text': false,
+							'icons': {
+								'primary': 'ui-icons ui-icon-check ui-corner-right'
+							}
+						}		
+
+						).click(function(){
 						if( ! validator.form() ) {
 							return false;
 						}

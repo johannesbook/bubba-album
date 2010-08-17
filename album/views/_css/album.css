@@ -472,7 +472,9 @@ table.ui-album-usertable thead
 	top: 0;
 	left: 0;
 }
-.ui-subdialog-action {
+.ui-subdialog-action,
+.ui-album-users-actions
+ {
 	display: inline-block;
 	background: transparent;
 	border: 0;
@@ -491,12 +493,39 @@ table.ui-album-usertable thead
 	width:110px;
 }
 
-.ui-subdialog-action .ui-icon-check
+.ui-album-users-actions {
+	text-align: right;
+}
+#fn-albummanager-users-edit-template input {
+	width : 145px;
+}
+
+.ui-subdialog-action button,
+.ui-album-users-actions button
+{
+	display:inline;
+    background:transparent !important;
+	margin:0;
+	padding:0;
+}
+.ui-album-users-actions button
+{
+	vertical-align: bottom;
+}
+
+.ui-subdialog-action .ui-icon-check,
+.ui-album-users-actions .ui-icon-check
 {
 	background-position:-301px -135px;
 }
+.ui-subdialog-action .ui-icon-close,
+.ui-album-users-actions .ui-icon-close
+{
+	background-position:-265px -135px;
+}
 
-.ui-subdialog-action .ui-icon-check,.ui-subdialog-action .ui-icon-close
+.ui-subdialog-action .ui-icon-check,.ui-subdialog-action .ui-icon-close,
+.ui-album-users-actions .ui-icon-check,.ui-album-users-actions .ui-icon-close
 {
 	background-image: url(../_img/icons.png) !important;
 	background-repeat: no-repeat;
@@ -508,21 +537,4 @@ table.ui-album-usertable thead
 	width:37px;
 }
 
-.ui-subdialog-action .ui-icon-close
-{
-	background-position:-265px -135px;
-}
-
-.ui-subdialog-action button
-{
-	display:inline;
-    background-color:transparent;
-	margin:0;
-	padding:0;
-}
-
-.ui-album-users-actions {
-	width: 100%;
-	text-align: right;
-}
 

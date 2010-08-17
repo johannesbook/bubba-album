@@ -304,12 +304,8 @@
 		</div>
 
 		<div class="ui-album-users-actions">
-			<button id="fn-albummanager-users-edit-cancel" type="button">
-				<?=t('albummanager-users-button-cancel')?>
-			</button>
-			<button id="fn-albummanager-users-edit-ok" type="button">
-				<?=t('albummanager-users-button-ok')?>
-			</button>
+			<button id="fn-albummanager-users-edit-cancel" type="button"></button>
+			<button id="fn-albummanager-users-edit-ok" type="button"></button>
 		</div>
 
 

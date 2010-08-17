@@ -6,9 +6,9 @@ bubba-album (2.1~pre11) vincent; urgency=low
   * Fixed tooltip on toplevel icons. (Closes: #1490)
   * Disabled slideshow button if no images in album (Closes: #1479)
   * Allowing 'admin' to view public albums, but not to enter manager mode. (Closes: #1478)
- 
+  * Fixed buttons in user edit dialog. (Closes: #1477) 
 
- -- PA Nilsson <pa@excito.com>  Mon, 16 Aug 2010 13:51:25 +0200
+ -- PA Nilsson <pa@excito.com>  Tue, 17 Aug 2010 09:03:20 +0200
 
 bubba-album (2.1~pre10) vincent; urgency=low
 
