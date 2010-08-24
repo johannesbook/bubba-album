@@ -1,3 +1,9 @@
+bubba-album (2.1~pre12) hugo vincent; urgency=low
+
+  * Fixed move images to "root" folder. (Closes: #1518) 
+
+ -- PA Nilsson <pa@excito.com>  Tue, 24 Aug 2010 16:46:41 +0200
+
 bubba-album (2.1~pre11) vincent; urgency=low
 
   * Fixed permissions dialog. (Closes: #1476)

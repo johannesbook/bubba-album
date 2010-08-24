@@ -274,7 +274,6 @@
 	background-color:#efdfad;
 	border:2px solid #dfcf9d;
 	font-size:12px;
-	height:3em;
 	opacity:.95;
 	padding-bottom:.4em;
 	padding-top:.4em;
@@ -395,7 +394,15 @@ table.ui-album-usertable
 	overflow:auto;
 	width:100%;
 	margin-top : 10px;
+	margin-bottom : 10px;
 }
+#fn-albummanager-create-form-step-button-branch-adduser {
+	border : 0 none;
+	padding : 5px;
+	font-size : 12px;
+	margin-top : 10px;
+}
+
 table.ui-album-perm-public
 {
 	border:1px solid #ccc;

@@ -16,7 +16,7 @@ messages = {
 	/* Log in */
 	"login-dialog-continue" : "Login",
 
-	"albummanager-move-notice": "Gonna move %d albums and/or %d images, correct?",
+	"albummanager-move-notice": "Select destination to move %d albums and %d images?",
 	"albummanager-move-no": "No",
 	"albummanager-move-yes": "Yes",
 
@@ -33,7 +33,7 @@ messages = {
 	"albummanager-label-public": "Allow anonymous access?",
 	"albummanager-label-recursive": "Apply permissions recursive?",
 	"album-users-entry":"%s (%s)",
-	"album-users-delete-message": "Are you really sure you want to delete the user <strong>%s</strong> a.k.a. \"%s\"?",
+	"album-users-delete-message": "Delete user <strong>%s</strong> (\"%s\")?",
 
 	/* Help messages */
 	"help-box-header" : "Bubba Album help",

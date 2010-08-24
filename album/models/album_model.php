@@ -304,10 +304,18 @@ class Album_model extends Model {
 	}
 
 	function move_albums( $ids, $target ) {
-		return $this->db->query("UPDATE album SET parent = ? WHERE id in {$this->_in($ids)}", array( $target ));
+		if($target == 'null') {
+			return $this->db->query("UPDATE album SET parent = NULL WHERE id in {$this->_in($ids)}", array( $target ));
+		} else {
+			return $this->db->query("UPDATE album SET parent = ? WHERE id in {$this->_in($ids)}", array( $target ));
+		}
 	}
 	function move_images( $ids, $target ) {
-		return $this->db->query("UPDATE image SET album = ? WHERE id in {$this->_in($ids)}", array( $target ));
+		if($target == 'null') {
+			return $this->db->query("UPDATE image SET album = NULL WHERE id in {$this->_in($ids)}");
+		} else {
+			return $this->db->query("UPDATE image SET album = ? WHERE id in {$this->_in($ids)}", array( $target ));
+		}
 	}
 	function delete_albums( $ids ) {
 		return $this->db->query("DELETE FROM album WHERE id in {$this->_in($ids)}");

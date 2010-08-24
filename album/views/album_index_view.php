@@ -101,9 +101,8 @@
 							<td><label for="fn-albummanager-create-caption">
 									<?=t('albummanager-label-caption')?>
 									:</label> 
-								<textarea id="fn-albummanager-create-caption" name=
-									"caption" class="ui-input-text">
-							</textarea></td>
+								<textarea id="fn-albummanager-create-caption" name="caption" class="ui-input-text"></textarea>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -111,30 +110,33 @@
 				<div id="fn-albummanager-create-form-step-2" class="step">
 					<h3><?=t('albummanager-create-dialog-step2-title')?>
 					</h3>
+					<table><tr><td>
+						<div>
+							<label for="fn-albummanager-create-public">
+								<?=t('albummanager-label-public')?>
+								:</label> <input type="checkbox" id=
+							"fn-albummanager-create-public" name="public" class=
+							"slide" />
+						</div>
 
-					<div>
-						<label for="fn-albummanager-create-public">
-							<?=t('albummanager-label-public')?>
-							:</label> <input type="checkbox" id=
-						"fn-albummanager-create-public" name="public" class=
-						"slide" />
-					</div>
-
-					<div>
-						<table class="ui-table-outline ui-album-usertable">
-							<thead>
-								<tr class=
-									"ui-state-default ui-widget-header ui-albummanager-header">
-									<td></td>
-
-									<td>Access allowed</td>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-					<button id="fn-albummanager-create-form-step-button-branch-adduser" type="button" value="fn-albummanager-create-form-step-offstep-adduser"><?=t('albummanager-create-dialog-manage-users')?></button>
+						<div>
+							<table class="ui-table-outline ui-album-usertable">
+								<thead>
+									<tr class=
+										"ui-state-default ui-widget-header ui-albummanager-header">
+										<td></td>
+	
+										<td>Access allowed</td>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<hr></hr>
+						<button class="ui-button ui-state-default ui-corner-all ui-button-text-only" id="fn-albummanager-create-form-step-button-branch-adduser" type="button" value="fn-albummanager-create-form-step-offstep-adduser"><?=t('albummanager-create-dialog-manage-users')?></button>
+					</td></tr></table>
+						
 				</div>
 
 				<div id="fn-albummanager-create-form-step-3" class="step submit_step">
