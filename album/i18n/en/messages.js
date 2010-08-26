@@ -35,6 +35,11 @@ messages = {
 	"album-users-entry":"%s (%s)",
 	"album-users-delete-message": "Delete user <strong>%s</strong> (\"%s\")?",
 
+	/* User manager */
+	"albummanager-del-no": "Cancel",
+	"albummanager-del-yes": "Delete user",
+	
+	
 	/* Help messages */
 	"help-box-header" : "Bubba Album help",
 	"help-info::anon::main": "Click on login to login etc...",

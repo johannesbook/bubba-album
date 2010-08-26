@@ -1,3 +1,9 @@
+bubba-album (2.1~pre13) hugo vincent; urgency=low
+
+  * Fixed some texts and UI details.
+
+ -- PA Nilsson <pa@excito.com>  Thu, 26 Aug 2010 10:43:32 +0200
+
 bubba-album (2.1~pre12) hugo vincent; urgency=low
 
   * Fixed move images to "root" folder. (Closes: #1518) 

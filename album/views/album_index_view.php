@@ -237,11 +237,9 @@
 			id="fn-albummanager-users-dialog-buttons">
 			<button id="fn-albummanager-users-dialog-button-add" disabled="disabled">
 				<?=t('albummanager-users-dialog-button-add')?>
-			</button>
-			<button id="fn-albummanager-users-dialog-button-edit" disabled="disabled">
+			</button><button id="fn-albummanager-users-dialog-button-edit" disabled="disabled">
 				<?=t('albummanager-users-dialog-button-edit')?>
-			</button>
-			<button id=	"fn-albummanager-users-dialog-button-delete" disabled="disabled">
+			</button><button id=	"fn-albummanager-users-dialog-button-delete" disabled="disabled">
 				<?=t('albummanager-users-dialog-button-delete')?>
 			</button>
 		</div>
@@ -306,8 +304,7 @@
 		</div>
 
 		<div class="ui-album-users-actions">
-			<button id="fn-albummanager-users-edit-cancel" type="button"></button>
-			<button id="fn-albummanager-users-edit-ok" type="button"></button>
+			<button id="fn-albummanager-users-edit-cancel" type="button"></button><button id="fn-albummanager-users-edit-ok" type="button"></button>
 		</div>
 
 
@@ -355,10 +352,7 @@
 
 		<div class="ui-album-users-actions">
 			<button id="fn-albummanager-users-add-cancel" type="button">
-				<?=t('albummanager-users-button-cancel')?>
-			</button>
-			<button id="fn-albummanager-users-add-ok" type="button">
-				<?=t('albummanager-users-button-ok')?>
+			</button><button id="fn-albummanager-users-add-ok" type="button">
 			</button>
 		</div>
 

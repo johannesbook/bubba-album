@@ -864,7 +864,7 @@ $(function() {
 		);
 
 		$('#fn-albummanager-users-dialog-button-add').button({
-				'text': false,
+				'text': $.message("albummanager-users-add"),
 				'icons': {
 					'primary': 'ui-icons ui-icon-plusthick'
 				}
@@ -898,13 +898,27 @@ $(function() {
 				wrapper.find('td').addClass('ui-albummanager-users-edit').append(form).end().prependTo(table);
 				$('#fn-albummanager-users-dialog').addClass('ui-albummanager-edit-mode');
 
-				form.find("#fn-albummanager-users-add-cancel").button().click(function(){
+				form.find("#fn-albummanager-users-add-cancel").button(
+						{
+							'text': $.message("albummanager-users-add-cancel"),
+							'icons': {
+								'primary': 'ui-icons ui-icon-close ui-corner-left'
+							}
+						}		
+					).click(function(){
 						$('#fn-albummanager-users-dialog-button-add').button("enable");
 						$('#fn-albummanager-users-dialog').removeClass('ui-albummanager-edit-mode');
 						wrapper.remove();
 					}
 				);
-				form.find("#fn-albummanager-users-add-ok").button().click(function(){
+				form.find("#fn-albummanager-users-add-ok").button(
+							{
+								'text': $.message("albummanager-users-add-ok"),
+								'icons': {
+									'primary': 'ui-icons ui-icon-check ui-corner-right'
+								}
+							}		
+						).click(function(){
 						if( ! validator.form() ) {
 							return false;
 						}
@@ -931,7 +945,7 @@ $(function() {
 			}
 		);
 		$('#fn-albummanager-users-dialog-button-edit').button({
-				'text': false,
+				'text': $.message("albummanager-button-edit"),
 				'icons': {
 					'primary': 'ui-icons ui-icon-pencil'
 				}
@@ -957,7 +971,9 @@ $(function() {
 					}
 					}
 				);
+				//form.hide();
 				selected.html(form);
+				//form.slideDown('fast');
 				form[0].reset();
 
 				selected.removeClass('ui-albummanager-state-selected').addClass('ui-albummanager-users-edit');
@@ -969,7 +985,7 @@ $(function() {
 				form[0].realname.focus();
 				form.find("#fn-albummanager-users-edit-cancel").button(
 					{
-						'text': false,
+						'text': $.message("albummanager-edit-cancel"),
 						'icons': {
 							'primary': 'ui-icons ui-icon-close ui-corner-left'
 						}
@@ -982,7 +998,7 @@ $(function() {
 					);
 				form.find("#fn-albummanager-users-edit-ok").button(
 						{
-							'text': false,
+							'text': $.message("albummanager-edit-ok"),
 							'icons': {
 								'primary': 'ui-icons ui-icon-check ui-corner-right'
 							}

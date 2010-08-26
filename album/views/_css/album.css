@@ -416,11 +416,6 @@ table.ui-album-perm-public
 	width : 75%;
 }
 
-table.ui-album-usertable tbody
-{
-	height:100px;
-}
-
 table.ui-album-usertable thead
 {
 	border-bottom:1px solid #aaa;
@@ -472,7 +467,7 @@ table.ui-album-usertable thead
 	text-align: center;
 	padding-top: 1em;
 	width: 100%;
-	height: 50px;
+	height: 60px;
 	background-color: #000;
 	color: #fff;
 	position: absolute;
@@ -489,6 +484,7 @@ table.ui-album-usertable thead
 
 .ui-subdialog-message {
 	font-weight: 400;
+	margin : 4px;
 }
 
 .ui-subdialog-message strong {
@@ -502,8 +498,11 @@ table.ui-album-usertable thead
 
 .ui-album-users-actions {
 	text-align: right;
+	vertical-align: bottom;
+	margin-bottom : 2px;	
 }
-#fn-albummanager-users-edit-template input {
+
+#fn-albummanager-users-edit-template input, #fn-albummanager-users-add-template input {
 	width : 145px;
 }
 
@@ -514,10 +513,7 @@ table.ui-album-usertable thead
     background:transparent !important;
 	margin:0;
 	padding:0;
-}
-.ui-album-users-actions button
-{
-	vertical-align: bottom;
+	border : 0 none;
 }
 
 .ui-subdialog-action .ui-icon-check,
@@ -543,5 +539,4 @@ table.ui-album-usertable thead
 	overflow:hidden;
 	width:37px;
 }
-
 
