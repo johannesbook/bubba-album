@@ -1,6 +1,9 @@
 messages = {
 	'next': 'Next',
-	'back': 'Back',	
+	'back': 'Back',
+	'ui-albummanager-album-name' : "Album name",
+	'ui-albummanager-album-caption' : "Description",
+	'ui-albummangaer-images-in-album' : "in",
 	/* Topnav */
 	"topnav-authorized-bubba" : "Logged in as bubba user '%s'",
 	"topnav-authorized-album" : "Viewing album as '%s'",
@@ -44,8 +47,9 @@ messages = {
 	"help-box-header" : "Bubba Album help",
 	"help-info::anon::main": "Click on login to login etc...",
 	"help-info::user::main": "Click on manager button to enter manager mode...",
-	"help-info::manager::main": "Add a new album by clicking on the add new album button..."
+	"help-info::manager::main": "Add a new album by clicking on the add new album button...",
 
-
+	/* Create wizard */
+	"albummanager-create-button-finish":"Create album"
 
 };

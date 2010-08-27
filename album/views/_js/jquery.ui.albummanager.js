@@ -5,7 +5,7 @@ function mysqlTimeStampToDate(timestamp) {
 	var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
 	return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
 }
-
+	
 jQuery.fn.dataTableExt._fnFeatureHtmlProcessing = function ( oSettings )
 {
 	var nProcessing = jQuery( 'div', 
@@ -195,6 +195,7 @@ jQuery.widget("ui.albummanager", {
 			   "fnDrawCallback": function() {
 				   var images = $('#fn-images');
 				   images.empty();
+				   $("#fn-albummanager-image-header-albumname").empty();
 
 				   $.each( self._images, function() {
 						   var acell = jQuery('#fn-templates .ui-album-image').clone();
@@ -235,9 +236,18 @@ jQuery.widget("ui.albummanager", {
 						   var modified = mysqlTimeStampToDate(self.current.modified).toDateString();
 					   }
 
-					   $('.ui-album-title', infobox).html(self.current.name);
+					   /*
+					   $('.ui-album-title', infobox).html(
+							   "<span class='ui-albummanager-album-name'>"+$.message("ui-albummanager-album-name")+":</span> " + self.current.name
+					   		);
+					   */
+					   if(self.current.name) {
+						   $("#fn-albummanager-image-header-albumname").text($.message("ui-albummangaer-images-in-album") + " '" + self.current.name +"'");
+					   }
 					   if( self.current.caption ) {
-						   $('.ui-album-caption', infobox).html(self.current.caption.replace( /\n/g , "<br/>" ));
+						   $('.ui-album-caption', infobox).html(
+								   "<span class='ui-albummanager-album-caption'>"+$.message("ui-albummanager-album-caption")+":</span> " + self.current.caption.replace( /\n/g , "<br/>" )
+						   );
 					   } else {
 						   $('.ui-album-caption', infobox).empty();
 					   }
@@ -267,6 +277,7 @@ jQuery.widget("ui.albummanager", {
 				   cell.find(".ui-album-public").toggleClass( 'ui-album-private', !data.public );
 
 				   cell.find(".ui-album-title").html(data.name);
+				   cell.find(".ui-album-caption").html(data.caption);
 				   if( data.subalbum_count ) {
 					   cell.find(".ui-album-count").html($.message("album-image-subalbum-count", data.image_count, data.subalbum_count));
 				   } else {

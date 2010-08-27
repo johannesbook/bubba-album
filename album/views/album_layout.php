@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Bubba|2 - photo album</title>
+<title><?=$this->config->item("name")?> - photo album</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.theme.default.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/admin.css" />
@@ -20,6 +20,20 @@
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/main.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.iCheckbox.js" type="text/javascript"></script>
 
+<!-- Configuration -->
+<script>
+config = <?=json_encode(
+	array(
+		'prefix' => site_url(),
+		'userinfo' => $userinfo,
+		'has_access' => $has_access,
+		'name'		=> $this->config->item('name'),
+	)
+)?>;
+manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
+section_stack = [];
+</script>
+
 <!-- Internationalization -->
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.sprintf.js"></script>
 <?global $langcode?>
@@ -28,18 +42,6 @@
 <?else :?>
 <script type="text/javascript" src="<?=$this->config->item("base_url")."/i18n/en/messages.js"?>"></script>
 <?endif?>
-
-<script>
-config = <?=json_encode(
-	array(
-		'prefix' => site_url(),
-		'userinfo' => $userinfo,
-		'has_access' => $has_access,
-	)
-)?>;
-manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
-section_stack = [];
-</script>
 
 <script>
 jQuery.validator.setDefaults({ 
@@ -294,8 +296,14 @@ $(function(){
 		<tr>
 		<td id="content_wrapper">	
             <div id="header">		
-                
-				<a href="#" id="a_logo" onclick="location.href='<?=$this->config->item("base_url")?>';"><img id="img_logo" src="<?=$this->config->item("base_url").'/views'?>/_img/logo.png" alt="BUBBA | 2" title="BUBBA | 2" /></a>
+                <? 
+                if(isB3()) {
+                	$logo = "B3_logo.png";
+                } else {
+                	$logo = "logo.png";
+                }
+                ?>
+				<a href="#" id="a_logo" onclick="location.href='<?=$this->config->item("base_url")?>';"><img id="img_logo" src="<?=$this->config->item("base_url").'/views'?>/_img/<?=$logo?>" alt="<?=$this->config->item('name')?> <?=t('photo album')?>" title="<?=$this->config->item('name')?> <?=t('photo album')?>" /></a>
 
             </div>	<!-- header -->		
             <div id="content">

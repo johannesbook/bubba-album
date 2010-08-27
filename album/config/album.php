@@ -1,5 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+if(isB3()) {
+	$config['name'] = "B3";
+} else {
+	$config['name'] = "Bubba|2";
+}
+
 $config['image_path'] = '';
 $config['thumbs_path'] = '/var/lib/album/thumbs';
 

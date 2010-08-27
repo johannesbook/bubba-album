@@ -189,30 +189,35 @@ copymove_callback = function(type) {
 
 var dialog_options = {
 	'create': {
-		'width': 800,
-		'height': 600,
-		'minWidth': 800,
-		'minHeight': 600,
-		'resizable': true
+		'width': 600,
+		'height': 500,
+		'minWidth': 600,
+		'minHeight': 400,
+		'resizable': true,
+		'position': ['center',100]
 	},
 	'users': {
-		'width': 800,
-		'height': 600
+		'width': 600,
+		'height': 400,
+		'position': ['center',100]
 	},	
 	'modify': {
 		'width': 600,
-		'height': 400
+		'height': 400,
+		'position': ['center',100]
 	},	
 	'perm': {
 		'width': 600,
-		'height': 400
+		'height': 400,
+		'position': ['center',100]
 	},		
 	'add': {
-		'width': 800,
-		'height': 600,
-		'minWidth': 800,
-		'minHeight': 600,
-		'resizable': true
+		'width': 600,
+		'height': 400,
+		'minWidth': 600,
+		'minHeight': 400,
+		'resizable': true,
+		'position': ['center',100]
 	}
 };
 
@@ -810,6 +815,7 @@ $(function() {
 				formPluginEnabled: true,
 				back: buttonpane.find('.ui-prev-button'),
 				next: buttonpane.find('.ui-next-button'),
+				textSubmit: $.message("albummanager-create-button-finish"),
 				showBackOnFirstStep: true,
 				afterNext: function(wizardData) {
 					if (wizardData.currentStep == "fn-albummanager-create-form-step-2") {

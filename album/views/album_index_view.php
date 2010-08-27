@@ -14,11 +14,11 @@
 
 		<tr class=
 			"ui-state-default ui-widget-header ui-albummanager-header">
-			<th>Album</th>
+			<th><?=t('Albums')?></th>
 
-			<th>Created</th>
+			<th><?=t('Created')?></th>
 
-			<th>Modified</th>
+			<th><?=t('Modified')?></th>
 
 			<th></th>
 		</tr>
@@ -38,6 +38,10 @@
 	</tbody>
 
 	<tfoot>
+		<tr class=
+			"ui-state-default ui-widget-header ui-albummanager-header">
+			<th colspan="4"><?=t("Images")?> <span id="fn-albummanager-image-header-albumname"></span></th>
+		</tr>
 		<tr id="fn-album-infobox">
 			<td>
 				<div class="ui-album-title"></div>

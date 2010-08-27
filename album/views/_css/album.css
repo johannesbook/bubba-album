@@ -117,6 +117,7 @@
 .ui-album-count
 {
 	font-size:12px;
+	margin-top : 10px;
 }
 
 .ui-album-image
@@ -210,11 +211,6 @@
 .ui-albummanager .ui-albummanager-state-selected .ui-icon-folder-collapsed
 {
 	background-position:-161px -257px;
-}
-
-.ui-albummanager span
-{
-	float:left!important;
 }
 
 .ui-albummanager tbody tr.row-selected:hover *
@@ -372,7 +368,7 @@
 
 .ui-form-wrapper
 {
-	height:300px;
+	height:260px;
 }
 
 div.ui-album-usertable-container
