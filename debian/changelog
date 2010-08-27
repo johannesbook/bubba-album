@@ -1,3 +1,9 @@
+bubba-album (2.1~pre15) hugo vincent; urgency=low
+
+  * Added image description to image view/slideshow dialog. 
+
+ -- PA Nilsson <pa@excito.com>  Fri, 27 Aug 2010 15:56:27 +0200
+
 bubba-album (2.1~pre14) hugo vincent; urgency=low
 
   * Using 'B3' texts and icons.

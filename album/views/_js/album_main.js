@@ -21,17 +21,21 @@ var update_manager_access = function() {
 }
 var colorbox_title = function() {
 	var title = $(this).attr('title');
+	var caption = $(this).attr('caption');
 	var view_url = $(this).attr('href').replace('medium', 'view');
 	var download_url = $(this).attr('href').replace('medium', 'download');
+	var metadata = $('<div/>');
+	metadata.append($('<span/>', { 'text': title, 'id': 'cboxTitleTitle'}));
+	metadata.append($('<br/>'));
+	metadata.append($('<span/>', { 'text': caption, 'id': 'cboxTitleCaption'}));	
+
 	var nodes = $([]);
-	nodes = nodes.add($('<a/>', { 'href': view_url, 'target': '_blank', 'text': 'view original', 'id': 'cboxViewOriginal'}));
-	nodes = nodes.add($('<span/>', { 'text': title, 'id': 'cboxTitleTitle'}));
-	nodes = nodes.add($('<a/>', { 'href': download_url, 'target': '_blank', 'text': 'download original', 'id': 'cboxDownloadOriginal'}));
+	nodes = nodes.add($('<a/>', { 'href': view_url, 'target': '_blank', 'text': $.message('View original'), 'id': 'cboxViewOriginal'}));
+	nodes = nodes.add(metadata);
+	nodes = nodes.add($('<a/>', { 'href': download_url, 'target': '_blank', 'text': $.message('Download original'), 'id': 'cboxDownloadOriginal'}));
 	
 	return nodes;
 }
-
-
 
 var update_manager_mode_no_reload = function() {
 	if (!manager_mode) {
@@ -42,7 +46,13 @@ var update_manager_mode_no_reload = function() {
 				'slideshow': true,
 				'slideshowAuto': false,
 				'title': colorbox_title,
-				'open': false
+				'open': false,
+				'next': $.message('Next'),
+				'close': "Close",
+				'previous':$.message('Previous'),
+				'slideshowStart': "Start slideshow",
+				'slideshowStop': "Stop slideshow",
+				'current': "Image \{current\} of \{total\}"
 			}
 		);
 	} else {
@@ -319,7 +329,6 @@ var dialog_pre_open_callbacks = {
 						);
 						table.append(row);
 						row.append(cell);
-						//cell.append($("<label for='fn-albummanager-perm-dialog-label'/>", {
 						cell.append($("<label/>", {
 									'html': this.realname + " (" + this.username + ")",
 									'for' : 'fn-albummanager-perm-dialog-label' + this.username
@@ -571,7 +580,13 @@ var buttons = [{
 					'slideshow': true,
 					'slideshowAuto': true,
 					'title': colorbox_title,
-					'open': true
+					'open': true,
+					'next': $.message('Next'),
+					'close': "Close",
+					'previous':$.message('Previous'),
+					'slideshowStart': "Start slideshow",
+					'slideshowStop': "Stop slideshow",
+					'current': "Image \{current\} of \{total\}"
 				}
 			);
 			$(window).one('cbox_closed', function() {
@@ -580,7 +595,13 @@ var buttons = [{
 							'slideshow': true,
 							'slideshowAuto': false,
 							'title': colorbox_title,
-							'open': false
+							'open': false,
+							'next': $.message('Next'),
+							'close': "Close",
+							'previous':$.message('Previous'),
+							'slideshowStart': "Start slideshow",
+							'slideshowStop': "Stop slideshow",
+							'current': "Image \{current\} of \{total\}"
 						}
 					);
 				}
@@ -604,7 +625,13 @@ var after_draw_images_callback = function() {
 				'slideshowSpeed': 5000,
 				'slideshow': true,
 				'slideshowAuto': false,
-				'title': colorbox_title
+				'title': colorbox_title,
+				'next': $.message('Next'),
+				'close': "Close",
+				'previous':$.message('Previous'),
+				'slideshowStart': "Start slideshow",
+				'slideshowStop': "Stop slideshow",
+				'current': "Image \{current\} of \{total\}"
 			}
 		);
 	}
@@ -977,9 +1004,9 @@ $(function() {
 					}
 					}
 				);
-				//form.hide();
+				// form.hide();
 				selected.html(form);
-				//form.slideDown('fast');
+				// form.slideDown('fast');
 				form[0].reset();
 
 				selected.removeClass('ui-albummanager-state-selected').addClass('ui-albummanager-users-edit');

@@ -209,7 +209,8 @@ jQuery.widget("ui.albummanager", {
 							   {
 								   'href': config.prefix + "/image/medium/" + this.id,
 								   'rel': 'fn-image',
-								   'title': this.name
+								   'title': this.name,
+								   'caption': this.caption
 							   }
 						   ).data({
 						   'path': this.id,
