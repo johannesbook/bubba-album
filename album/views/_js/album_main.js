@@ -26,8 +26,8 @@ var colorbox_title = function() {
 	var download_url = $(this).attr('href').replace('medium', 'download');
 	var metadata = $('<div/>');
 	metadata.append($('<span/>', { 'text': title, 'id': 'cboxTitleTitle'}));
-	metadata.append($('<br/>'));
-	metadata.append($('<span/>', { 'text': caption, 'id': 'cboxTitleCaption'}));	
+//	metadata.append($('<br/>'));
+//	metadata.append($('<span/>', { 'text': caption, 'id': 'cboxTitleCaption'}));	
 
 	var nodes = $([]);
 	nodes = nodes.add($('<a/>', { 'href': view_url, 'target': '_blank', 'text': $.message('View original'), 'id': 'cboxViewOriginal'}));

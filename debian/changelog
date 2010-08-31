@@ -1,3 +1,10 @@
+bubba-album (2.1~pre16) hugo vincent; urgency=low
+
+  * Added help texts.
+  * Temporarily removed "description" text as it was inside the image.
+
+ -- PA Nilsson <pa@excito.com>  Tue, 31 Aug 2010 08:12:15 +0200
+
 bubba-album (2.1~pre15) hugo vincent; urgency=low
 
   * Added image description to image view/slideshow dialog. 
