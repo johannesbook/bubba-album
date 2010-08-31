@@ -76,7 +76,7 @@ messages = {
 	,
 	
 	"help-info::manager::main":
-	+"<h3>Menu items</h3>"
+	"<h3>Menu items</h3>"
 	+"<p>Observe that you have to highlight an album or a photo for some menu items to be selectable.</p>"
 	+"<ul>"
 		+"<li><strong>Create album</strong> - will add a new album. Before creating an album your photos must be located in your storage\pictures catalog.</li>"
