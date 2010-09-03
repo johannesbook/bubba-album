@@ -160,10 +160,6 @@ sub _process_thumb_work_queue {
 		system( 
 			"epeg",
 			"-w",
-			THUMB_WIDTH,
-			"-h",
-			THUMB_HEIGHT,
-			"-w",
 			max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
 			$current->{file},
 			THUMB_PATH . "/$current->{id}"
@@ -171,8 +167,6 @@ sub _process_thumb_work_queue {
 
 		system( 
 			"epeg",
-			"-w ".SCALE_WIDTH,
-			"-h ".SCALE_WIDTH,
 			"-m ".SCALE_WIDTH,
 			$current->{file},
 			SCALE_PATH . "/$current->{id}"

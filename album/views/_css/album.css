@@ -176,9 +176,9 @@
 	border:1px solid #cacaca;
 	box-shadow:3px 3px 3px #999;
 	display:inline-block;
-	height:100px;
 	margin:3px 9px 3px 3px;
-	width:100px;
+	height:75px;
+	width:75px;
 }
 
 .ui-albummanager

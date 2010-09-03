@@ -22,17 +22,21 @@ var update_manager_access = function() {
 var colorbox_title = function() {
 	var title = $(this).attr('title');
 	var caption = $(this).attr('caption');
+	if(caption == 'null') {
+		caption = "";
+	}
 	var view_url = $(this).attr('href').replace('medium', 'view');
 	var download_url = $(this).attr('href').replace('medium', 'download');
 	var metadata = $('<div/>');
 	metadata.append($('<span/>', { 'text': title, 'id': 'cboxTitleTitle'}));
-//	metadata.append($('<br/>'));
-//	metadata.append($('<span/>', { 'text': caption, 'id': 'cboxTitleCaption'}));	
+	//metadata.append($('<span/>', { 'text': caption, 'id': 'cboxTitleCaption'}));
 
 	var nodes = $([]);
 	nodes = nodes.add($('<a/>', { 'href': view_url, 'target': '_blank', 'text': $.message('View original'), 'id': 'cboxViewOriginal'}));
 	nodes = nodes.add(metadata);
 	nodes = nodes.add($('<a/>', { 'href': download_url, 'target': '_blank', 'text': $.message('Download original'), 'id': 'cboxDownloadOriginal'}));
+	//$("#cboxClose").parent().append($('<div/>', { 'text': caption, 'id': 'cboxTitleCaption'}));
+	
 	
 	return nodes;
 }
@@ -207,7 +211,7 @@ var dialog_options = {
 		'position': ['center',100]
 	},
 	'users': {
-		'width': 600,
+		'width': 800,
 		'height': 400,
 		'position': ['center',100]
 	},	
@@ -222,8 +226,8 @@ var dialog_options = {
 		'position': ['center',100]
 	},		
 	'add': {
-		'width': 600,
-		'height': 400,
+		'width': 800,
+		'height': 500,
 		'minWidth': 600,
 		'minHeight': 400,
 		'resizable': true,
@@ -456,13 +460,13 @@ var dialog_callbacks = {
 			},
 			'json'
 		);
-	},
+	}
 };
 
 var dialogs = {};
 var buttons = [{
 		'id': 'fn-albummanager-button-create',
-		'class': 'ui-manager-access',
+		'klass': 'ui-manager-access',
 		'disabled': ! manager_access,
 		'manager': true,
 		'type': 'ui-icons ui-album-icons ui-album-icon-create',
@@ -729,9 +733,7 @@ $(function() {
 				return false;
 			}
 		);
-
 		albummanager_obj = $("#albumtable");
-
 		filemanager_obj = $('#fn-filemanager');
 
 		$.each(['create', 'delete', 'add', 'modify', 'perm', 'users'], function(index, value) {
@@ -1136,8 +1138,16 @@ $(function() {
 			}
 		);
 		
-		$('#fn-albummanager-users-dialog-buttons').buttonset();
+		$('#fn-albummanager-users-dialog-buttons').buttonset();		
+		filemanager_obj.filemanager({
+			root: '/pictures',
+			animate: false,
+			dirPostOpenCallback: filemanager_after_open_dir_callback,
+			ajaxSource: config.prefix + "/filemanager/json"
 
+			}
+		);
+		
 		albummanager_obj.albummanager({
 				root: null,
 				managerMode: manager_mode,
@@ -1150,14 +1160,6 @@ $(function() {
 		);
 		albummanager_obj.albummanager('setButtons', buttons);
 
-		filemanager_obj.filemanager({
-				root: '/pictures',
-				animate: false,
-				dirPostOpenCallback: filemanager_after_open_dir_callback,
-				ajaxSource: config.prefix + "/filemanager/json"
-
-			}
-		);
 		update_manager_mode_no_reload();
 	}
 );

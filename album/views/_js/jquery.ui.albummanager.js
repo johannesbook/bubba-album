@@ -112,7 +112,7 @@ jQuery.widget("ui.albummanager", {
 			   "fnServerData": this.options.serverData ? jQuery.proxy(this.options.serverData,this) : function ( source, indata, callback ) {
 				   jQuery.throbber.show();
 				   indata = jQuery.extend({
-							   'manager_mode': self.options.managerMode,
+							   'manager_mode': self.options.managerMode
 						   },
 					   indata);				   
 				   jQuery.ajax( {
@@ -453,20 +453,23 @@ jQuery.widget("ui.albummanager", {
 	   this.buttonBar.empty();
 	   this.managerBar.empty();
 	   jQuery.each(buttons, function(index, value) {
-			   jQuery("<button/>", {html: value.alt, id: value.id, class: value.class}).appendTo( value.manager ? self.managerBar : self.buttonBar).button( { 
-					   text: false, 
-					   icons: { 
-						   primary: value.type 
+			   jQuery("<button/>", {'html': value.alt, 'id': value.id, 'class': value.klass})
+			   .appendTo( value.manager ? self.managerBar : self.buttonBar).button( { 
+					   'text': false, 
+					   'icons': { 
+						   'primary': value.type 
 					   }
 				   } ).data('is_disabled', value.disabled )
 			   .button( value.disabled ? 'disable': 'enable' )
-			   .click(function(e){jQuery(this).blur()})
+			   .click(function(e){
+				   jQuery(this).blur();
+			   	})
 			   .click(function(){
 					   if(! jQuery(this).hasClass("ui-state-disabled") ) {
 						   value.callback.apply(self.element, arguments);
 					   }
-				   });
-		   });	   
+				});
+		   });
    },
    disableButtons: function( disable ) {
 	   if( typeof disable == 'undefined' || disable ) {

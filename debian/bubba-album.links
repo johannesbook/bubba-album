@@ -4,6 +4,7 @@
 
 /usr/share/web-admin/admin/views/default/_css/jquery.ui.theme.default.css /usr/share/album/views/_css/jquery.ui.theme.default.css
 /usr/share/web-admin/admin/views/default/_css/admin.css /usr/share/album/views/_css/admin.css
+/usr/share/web-admin/admin/views/default/_css/IE7styles.css /usr/share/album/views/_css/IE7styles.css
 
 /usr/share/web-admin/admin/views/default/_img/background-left.png /usr/share/album/views/_img/background-left.png
 /usr/share/web-admin/admin/views/default/_img/background-right.png /usr/share/album/views/_img/background-right.png
@@ -14,6 +15,7 @@
 /usr/share/web-admin/admin/views/default/_img/icons_home.png /usr/share/album/views/_img/icons_home.png
 /usr/share/web-admin/admin/views/default/_img/logo.png /usr/share/album/views/_img/logo.png
 /usr/share/web-admin/admin/views/default/_img/B3_logo.png /usr/share/album/views/_img/B3_logo.png
+/usr/share/web-admin/admin/views/default/_img/purple-X.png /usr/share/album/views/_img/purple-X.png
 /usr/share/web-admin/admin/views/default/_img/overlay.png /usr/share/album/views/_img/overlay.png
 /usr/share/web-admin/admin/views/default/_img/spinner_black32.png /usr/share/album/views/_img/spinner_black32.png
 

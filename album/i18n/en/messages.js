@@ -5,7 +5,7 @@ messages = {
 	'ui-albummanager-album-caption' : "Description",
 	'ui-albummangaer-images-in-album' : "in",
 	/* Topnav */
-	"topnav-authorized-bubba" : "Logged in as B3 user '%s'",
+	"topnav-authorized-bubba" : "Logged in as " + config.name + " user '%s'",
 	"topnav-authorized-album" : "Viewing album as '%s'",
 	"topnav-authorized" : "Logged in as '%s'",
 	"topnav-not-authorized" : "Viewing album anonymously",
@@ -46,7 +46,7 @@ messages = {
 	
 	
 	/* Help messages */
-	"help-box-header" : "B3 Album help",
+	"help-box-header" : config.name + " Album help",
 	"help-info::anon::main":
 	"<h3>Viewing photos</h3>"
 	+"<ul>"
@@ -61,7 +61,7 @@ messages = {
 		+"<li>Edit photo albums.</li>"
 	+"</ul>"
 	
-	+"<p>B3 users (not administrator) may log in and create albums and create album users. Album users may log in and view albums.</p>"
+	+"<p>" + config.name + " users (not administrator) may log in and create albums and create album users. Album users may log in and view albums.</p>"
 	,
 	
 	"help-info::user::main":

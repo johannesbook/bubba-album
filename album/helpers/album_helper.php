@@ -28,7 +28,8 @@ function create_thumb( $orig, $target ) {
 				mkdir( $dir, 0755, true );
 		}
 		$tmpfname = tempnam("/tmp", "thumb");
-		exec("epeg -v -w $width -h $height -m $max \"$orig\" \"$target\"");
+		exec("epeg -v -m $max \"$orig\" \"$target\"");
+		//exec("epeg -v -w $width -h $height -m $max \"$orig\" \"$target\"");
 		unlink( $tmpfname);
 }
 

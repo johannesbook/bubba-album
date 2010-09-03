@@ -7,6 +7,8 @@
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.theme.default.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/admin.css" />
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/album.css" />
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/IE7styles.css" /><![endif]-->  
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/IE7album_styles.css" /><![endif]-->  
 <? /*<link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.ui.throbber.css" /> */?>
 
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.js"></script>
@@ -296,14 +298,19 @@ $(function(){
 		<tr>
 		<td id="content_wrapper">	
             <div id="header">		
-                <? 
-                if(isB3()) {
-                	$logo = "B3_logo.png";
-                } else {
-                	$logo = "logo.png";
-                }
-                ?>
-				<a href="#" id="a_logo" onclick="location.href='<?=$this->config->item("base_url")?>';"><img id="img_logo" src="<?=$this->config->item("base_url").'/views'?>/_img/<?=$logo?>" alt="<?=$this->config->item('name')?> <?=t('photo album')?>" title="<?=$this->config->item('name')?> <?=t('photo album')?>" /></a>
+                <?if(isB3()):?>
+	                <a href="#" id="a_logo" onclick="location.href='<?=$this->config->item("base_url")?>'">
+                	<img id="img_logo" src="<?=$this->config->item("base_url")?>/views/_img/B3_logo.png" alt="<?=t("B3 start page")?>" title="<?=t("B3 start page")?>" />
+                	</a>
+                	<div id="main-excito-logo">
+                		<a href="http://www.excito.com" class="ui-excito-link"><img id="ex_logo" src="<?=$this->config->item("base_url")?>/views/_img/purple-X.png" alt="<?=t('Excito')?>" /></a>
+                		<span id="ui-main-byExcito">by Excito Sweden</span>
+                	</div>
+                <?else:?>
+  		                <a href="#" id="a_logo" onclick="location.href='<?=$this->config->item("base_url")?>'">
+                		<img id="img_logo" src="<?=$this->config->item("base_url")?>/views/_img/logo.png" alt="BUBBA | 2" title="BUBBA | 2" />
+                		</a>
+                <?endif?>
 
             </div>	<!-- header -->		
             <div id="content">

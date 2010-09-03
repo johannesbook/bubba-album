@@ -1,3 +1,13 @@
+bubba-album (2.1~pre18) hugo vincent; urgency=low
+
+  * Fixed reserved word 'class' to not trigger IE and Safari (Closes: #1540, #1548)
+  * Fixed user dialog width. (Closes: #1534)
+  * Fixed various style mismatches in IE7.
+  * New top logotype
+  * Fixed thumbs aspect ratio (Closes: #1535)
+
+ -- PA Nilsson <pa@excito.com>  Fri, 03 Sep 2010 19:32:29 +0200
+
 bubba-album (2.1~pre17) hugo vincent; urgency=low
 
   * Fixed linebreaks in help file. 

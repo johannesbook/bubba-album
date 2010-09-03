@@ -382,7 +382,7 @@ class Album_model extends Model {
 					'image', 
 					array( 
 						'album' => $parent,  
-						'name' => $file,
+						'name' => basename($file),
 						'path' => realpath($file), 
 						'width' => $width, 
 						'height' => $height
