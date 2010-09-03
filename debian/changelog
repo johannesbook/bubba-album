@@ -1,3 +1,9 @@
+bubba-album (2.1.0) hugo vincent; urgency=low
+
+  * Bumped version.
+
+ -- PA Nilsson <pa@excito.com>  Fri, 03 Sep 2010 20:01:37 +0200
+
 bubba-album (2.1~pre18) hugo vincent; urgency=low
 
   * Fixed reserved word 'class' to not trigger IE and Safari (Closes: #1540, #1548)
