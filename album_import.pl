@@ -159,7 +159,7 @@ sub _process_thumb_work_queue {
 
 		system( 
 			"epeg",
-			"-w",
+			"-m",
 			max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
 			$current->{file},
 			THUMB_PATH . "/$current->{id}"

@@ -1,3 +1,9 @@
+bubba-album (2.1.1) hugo vincent; urgency=low
+
+  * Change scaling of thumbs. 
+
+ -- Tor Krill <tor@excito.com>  Fri, 10 Sep 2010 14:47:29 +0200
+
 bubba-album (2.1.0) hugo vincent; urgency=low
 
   * Bumped version.
