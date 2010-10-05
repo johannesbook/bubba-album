@@ -3,7 +3,13 @@ class Album extends Controller {
 	function __construct() {
 		parent::Controller();
 		$this->load->helper('i18n');
-		load_lang('en');
+		$this->load->model('admin');
+		$my_lang = $this->admin->get_language();
+		if($my_lang) {
+			load_lang($my_lang);
+		} else {
+			load_lang('en');
+		}
 	}
 	function json() {
 		$this->load->model("Album_model");

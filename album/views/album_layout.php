@@ -63,6 +63,7 @@ jQuery.validator.setDefaults({
 function postlogin_callback() {
 	var self = this;
 	var serial = $("#fn-login-dialog-form").serialize();
+
 	$("#fn-login-dialog-button").attr('disabled','disabled');
 	$("#fn-login-dialog-button").addClass("ui-state-disabled");
 	$("#fn-login-error").children().hide();
@@ -81,11 +82,12 @@ function postlogin_callback() {
 				var old_has_access = config.has_access;
 				config.has_access = data.has_access;
 				update_topnav_status();
-				if( config.has_access && old_has_access ) {
-					update_manager_mode();
-				} else {
+				// always reload after login to get the correct language
+				//if( config.has_access && old_has_access ) {
+				//	update_manager_mode();
+				//} else {
 					window.location.reload();
-				}
+				//}
 				$.event.trigger('auth_changed');
 			}
 		},"json");
@@ -101,9 +103,9 @@ function postlogout_callback( event, ui ) {
 			$(self).dialog('close');
 			$(self).dialog('destroy');
 			config.userinfo = data.userinfo;
-			if(!config.has_access) {
+			//if(!config.has_access) {
 					window.location.reload();
-			}
+			//}
 			update_topnav_status();
 			update_manager_mode();
 			$.event.trigger('auth_changed');

@@ -1,3 +1,10 @@
+bubba-album (2.1.2) hugo vincent; urgency=low
+
+  * Inital language support
+  * Added german language files
+
+ -- PA Nilsson <pa@excito.com>  Tue, 05 Oct 2010 16:26:41 +0200
+
 bubba-album (2.1.1) hugo vincent; urgency=low
 
   * Change scaling of thumbs. 

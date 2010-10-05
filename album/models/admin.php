@@ -79,6 +79,20 @@ class Admin extends Model {
 		return null;
 	}
 
+	public function get_language() {
+		$req = new HTTP_Request("http://localhost/admin/ajax_session/get_language");
+		$req->setMethod(HTTP_REQUEST_METHOD_GET);
+		$req->addCookie("PHPSESSID", $this->session_id);
+		$response = $req->sendRequest();
+		if (PEAR::isError($response)) {
+			return null;
+		} else {
+			$my_lang = json_decode($req->getResponseBody(), true);
+			return $my_lang['language'];
+		}
+		return null;
+	}
+	
 	public function get_userinfo( $force = false ) {
 		if( $force ) {
 			$session_id = $force;
