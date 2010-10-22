@@ -354,7 +354,7 @@
 
 .ui-albummanager-subbuttonbar
 {
-	display:inline-block;
+	display:inline;
 	margin-left:.5em;
 	margin-right:.5em;
 }
