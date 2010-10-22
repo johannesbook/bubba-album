@@ -239,13 +239,13 @@
 		<div class=
 			"ui-albummanager-buttonbar-wrapper ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix ui-albummanager-buttonbar ui-albummanager-subbuttonbar"
 			id="fn-albummanager-users-dialog-buttons">
-			<button id="fn-albummanager-users-dialog-button-add" disabled="disabled">
-				<?=t('albummanager-users-dialog-button-add')?>
-			</button><button id="fn-albummanager-users-dialog-button-edit" disabled="disabled">
-				<?=t('albummanager-users-dialog-button-edit')?>
-			</button><button id=	"fn-albummanager-users-dialog-button-delete" disabled="disabled">
-				<?=t('albummanager-users-dialog-button-delete')?>
-			</button>
+			<button id="fn-albummanager-users-dialog-button-add" disabled="disabled"><?=
+				t('albummanager-users-dialog-button-add')
+			?></button><button id="fn-albummanager-users-dialog-button-edit" disabled="disabled"><?=
+				t('albummanager-users-dialog-button-edit')
+			?></button><button id="fn-albummanager-users-dialog-button-delete" disabled="disabled"><?=
+				t('albummanager-users-dialog-button-delete')
+			?></button>
 		</div>
 
 		<table class="ui-table-outline ui-album-usertable">

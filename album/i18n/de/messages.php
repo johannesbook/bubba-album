@@ -39,6 +39,10 @@ $lang= array(
 
 	"albummanager-users-dialog-title" => "Albumbenutzer verwalten",
 	"albummanager-users-table-header" => "Albumbenutzer",
+	"albummanager-users-dialog-button-add" => "Benutzer hinzufügen", 
+	"albummanager-users-dialog-button-edit" => "Benutzer bearbeiten",
+	"albummanager-users-dialog-button-delete" => "Benutzer löschen",
+
 
 );
 

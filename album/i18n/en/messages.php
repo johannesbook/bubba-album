@@ -39,5 +39,8 @@ $lang= array(
 
 	"albummanager-users-dialog-title" => "Manage album users",
 	"albummanager-users-table-header" => "Album users",
+	"albummanager-users-dialog-button-add" => "Add user", 
+	"albummanager-users-dialog-button-edit" => "Edit user",
+	"albummanager-users-dialog-button-delete" => "Delete user",
 
 );

@@ -899,7 +899,7 @@ $(function() {
 		);
 
 		$('#fn-albummanager-users-dialog-button-add').button({
-				'text': $.message("albummanager-users-add"),
+				'text' : false,
 				'icons': {
 					'primary': 'ui-icons ui-icon-plusthick'
 				}
@@ -980,7 +980,7 @@ $(function() {
 			}
 		);
 		$('#fn-albummanager-users-dialog-button-edit').button({
-				'text': $.message("albummanager-button-edit"),
+				'text': false,
 				'icons': {
 					'primary': 'ui-icons ui-icon-pencil'
 				}
