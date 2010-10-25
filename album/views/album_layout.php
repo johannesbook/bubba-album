@@ -78,16 +78,16 @@ function postlogin_callback() {
 			} else {
 				$(self).dialog('close');
 				$(self).dialog('destroy');
+				old_lang = config.userinfo.language; 
 				config.userinfo = data.userinfo;
 				var old_has_access = config.has_access;
 				config.has_access = data.has_access;
 				update_topnav_status();
-				// always reload after login to get the correct language
-				//if( config.has_access && old_has_access ) {
-				//	update_manager_mode();
-				//} else {
+				if( config.has_access && old_has_access && (data.userinfo.language == old_lang)) {
+					update_manager_mode();
+				} else {
 					window.location.reload();
-				//}
+				}
 				$.event.trigger('auth_changed');
 			}
 		},"json");
