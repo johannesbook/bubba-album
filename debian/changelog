@@ -4,8 +4,9 @@ bubba-album (2.1.3) hugo vincent; urgency=low
   * Fixed tooltips in user dialog. (Closes: #1532) 
   * Only reload page if new language != current language. (Closes: #1588)
   * En text updates. (Closes: #1571)
+  * Fixed access rights on album wizard. (Closes: #1587) 
 
- -- PA Nilsson <pa@excito.com>  Mon, 25 Oct 2010 14:47:27 +0200
+ -- PA Nilsson <pa@excito.com>  Tue, 26 Oct 2010 09:40:10 +0200
 
 bubba-album (2.1.2) hugo vincent; urgency=low
 

@@ -349,14 +349,14 @@ class Album_model extends Model {
 		$sock->close();
 		return $ret;
 	}
-	function batch_add( $files, $album ) {
+	function batch_add( $files, $album , $public = false) {
 		$origdir = getcwd();
-		$added = $this->_batch_add( $files, $album );
+		$added = $this->_batch_add( $files, $album, $public );
 		chdir($origdir);
 		return $added;
 	}
 
-	function _batch_add( $files, $parent = null ) {
+	function _batch_add( $files, $parent = null, $public = false ) {
 		$added = array();
 		$to_process = array();
 		foreach( $files as $file ) {
@@ -366,7 +366,7 @@ class Album_model extends Model {
 			$file = rawurldecode( $file );
 			if( is_dir( $file )) {
 				$subalbum = basename( $file );
-				$this->db->insert( 'album', array( 'name' => $subalbum, 'parent' => $parent, 'public' => false ) );
+				$this->db->insert( 'album', array( 'name' => $subalbum, 'parent' => $parent, 'public' => $public ) );
 				$subalbum_id = $this->db->insert_id();
 				chdir( $file );
 				$added = array_merge( $added, $this->_batch_add( scandir( "." ), $subalbum_id ) );

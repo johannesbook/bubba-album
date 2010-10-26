@@ -16,7 +16,11 @@ class Create extends Controller {
 
 			$files = $this->input->post('files');
 			$users = $this->input->post('users');
-			$public = $this->input->post('public');
+			if($this->input->post('public')) {
+				$public = true;
+			} else {
+				$public = false;
+			}
 			$album = json_decode($this->input->post('album'));
 			$name = $this->input->post("name");
 			$caption = $this->input->post("caption");
@@ -48,13 +52,13 @@ class Create extends Controller {
 
 			$error = true;
 			if( $name ) {
-				$new_album_id = $this->Album_model->album_create_album($name, $caption, $album, !!$public );
+				$new_album_id = $this->Album_model->album_create_album($name, $caption, $album, $public );
 				if( $files && count($files) > 0 ) {
-					$this->Album_model->batch_add( $files, $new_album_id );
+					$this->Album_model->batch_add( $files, $new_album_id, $public );
 				}
 				$error = false;
 				if( $users && count( $users ) > 0 ) {
-					$error |= !$this->Album_model->modify_album_access( $new_album_id, $users );
+					$error |= !$this->Album_model->modify_album_access( $new_album_id, $users , true);
 				}
 			}
 			$data = array();
