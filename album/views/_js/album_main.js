@@ -44,6 +44,7 @@ var colorbox_title = function() {
 var update_manager_mode_no_reload = function() {
 	if (!manager_mode) {
 		$('.ui-album-public').hide();
+		$('#fn-albummanager-button-users').button("option", "disabled", true);
 		$("a[rel='fn-image'], #albumtable tbody tr").removeClass('ui-albummanager-state-selected');
 		$("a[rel='fn-image']").unbind('click.album').colorbox({
 				'photo': true,
@@ -61,6 +62,7 @@ var update_manager_mode_no_reload = function() {
 		);
 	} else {
 		$('.ui-album-public').show();
+		$('#fn-albummanager-button-users').button("option", "disabled", false);
 		$("a[rel='fn-image']").colorbox('destroy').bind('click.album', function() {
 				return false;
 			}
@@ -472,18 +474,23 @@ var buttons = [{
 		'type': 'ui-icons ui-album-icons ui-album-icon-create',
 		'alt': 'Create album',
 		'callback': function() {
-			$("#fn-albummanager-create").formwizard('reset');
-			dialogs["create"].find(".fn-placeholder-filemanager").append(filemanager_obj.parent());
-			filemanager_obj.filemanager('option', 'root', '/pictures').filemanager('reload', function() {
-
-					dialogs["create"].dialog("open");
-					$("#fn-albummanager-create-name").select();
-					dialogs['create'].dialog('widget').find('.ui-dialog-buttonpane .ui-prev-button').button('disable');
-					$("#fn-albummanager-create-public").removeAttr('checked').trigger('change');
-
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					$("#fn-albummanager-create").formwizard('reset');
+					dialogs["create"].find(".fn-placeholder-filemanager").append(filemanager_obj.parent());
+					filemanager_obj.filemanager('option', 'root', '/pictures').filemanager('reload', function() {
+		
+							dialogs["create"].dialog("open");
+							$("#fn-albummanager-create-name").select();
+							dialogs['create'].dialog('widget').find('.ui-dialog-buttonpane .ui-prev-button').button('disable');
+							$("#fn-albummanager-create-public").removeAttr('checked').trigger('change');
+		
+						}
+					);
+				} else {
+					window.location.reload();
 				}
-			);
-
+			},"json");
 		}
 	},
 	{
@@ -494,12 +501,17 @@ var buttons = [{
 		'type': 'ui-icons ui-album-icons ui-album-icon-add',
 		'alt': 'Add images',
 		'callback': function() {
-			dialogs["add"].find(".fn-placeholder-filemanager").append(filemanager_obj.parent());
-			filemanager_obj.filemanager('option', 'root', '/pictures').filemanager('reload', function() {
-					dialogs["add"].dialog("open");
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					dialogs["add"].find(".fn-placeholder-filemanager").append(filemanager_obj.parent());
+					filemanager_obj.filemanager('option', 'root', '/pictures').filemanager('reload', function() {
+							dialogs["add"].dialog("open");
+						}
+					);
+				} else {
+					window.location.reload();
 				}
-			);
-
+			},"json");
 		}
 	},
 	{
@@ -510,7 +522,13 @@ var buttons = [{
 		'type': 'ui-icons ui-icon-move',
 		'alt': 'Move',
 		'callback': function() {
-			copymove_callback.apply(this, ['move']);
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					copymove_callback.apply(this, ['move']);
+				} else {
+					window.location.reload();
+				}
+			},"json");
 		}
 	},
 
@@ -522,8 +540,13 @@ var buttons = [{
 		'alt': 'Rename',
 		'manager': true,
 		'callback': function() {
-			dialogs["modify"].dialog("open");
-
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					copymove_callback.apply(this, ['move']);
+				} else {
+					window.location.reload();
+				}
+			},"json");
 		}
 	},
 	{
@@ -534,8 +557,13 @@ var buttons = [{
 		'alt': 'Permissions',
 		'manager': true,
 		'callback': function() {
-			dialogs["perm"].dialog("open");
-
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					dialogs["perm"].dialog("open");
+				} else {
+					window.location.reload();
+				}
+			},"json");
 		}
 	},	
 	{
@@ -546,7 +574,13 @@ var buttons = [{
 		'type': 'ui-icons ui-album-icons ui-album-icon-person',
 		'alt': 'Manage users',
 		'callback': function() {
-			dialogs["users"].dialog("open");
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					dialogs["users"].dialog("open");
+				} else {
+					window.location.reload();
+				}
+			},"json");
 		}
 	},	
 	{
@@ -557,7 +591,13 @@ var buttons = [{
 		'type': 'ui-icons ui-icon-trash ui-albummanager-buttonbar-last',
 		'alt': 'Delete',
 		'callback': function() {
-			dialogs["delete"].dialog("open");
+			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
+				if(data.manager_mode) {
+					dialogs["delete"].dialog("open");
+				} else {
+					window.location.reload();
+				}
+			},"json");
 		}
 	},
 	{
@@ -1159,7 +1199,6 @@ $(function() {
 			}
 		);
 		albummanager_obj.albummanager('setButtons', buttons);
-
 		update_manager_mode_no_reload();
 	}
 );

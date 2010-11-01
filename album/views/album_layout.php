@@ -32,7 +32,8 @@ config = <?=json_encode(
 		'name'		=> $this->config->item('name'),
 	)
 )?>;
-manager_mode = <?=json_encode((bool)$this->session->userdata('manager_mode'))?>;
+
+manager_mode = <?=(isset($manager_access) && $manager_access)?"true":"false"?>;
 section_stack = [];
 </script>
 

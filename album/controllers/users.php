@@ -32,6 +32,14 @@ class Users extends Controller {
 			print json_encode(array());
 		}
 
+		public function check_manager_mode() {
+			$this->load->model('admin');
+			$this->load->model('Album_model');
+			header("Content-type: application/json");
+			$response['manager_mode'] = $this->admin->has_manager_access();
+			print json_encode($response);
+		}
+		
 		public function username_free() {
 			$this->load->model('admin');
 			$this->load->model('Album_model');
