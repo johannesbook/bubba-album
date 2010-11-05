@@ -124,6 +124,7 @@ class Album_model extends Model {
 		$this->db->select( 'image.id AS id, image.name AS name, image.caption AS caption' );
 		$this->db->from( 'image' );
 		$this->db->where( 'image.album', $album );
+		$this->db->order_by('image.name','id');
 
 		$query = $this->db->get();
 
