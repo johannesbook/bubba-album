@@ -542,7 +542,7 @@ var buttons = [{
 		'callback': function() {
 			$.post(config.prefix + "/users/check_manager_mode", {},function(data) {
 				if(data.manager_mode) {
-					copymove_callback.apply(this, ['move']);
+					dialogs["modify"].dialog("open");
 				} else {
 					window.location.reload();
 				}
