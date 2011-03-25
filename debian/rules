@@ -6,5 +6,6 @@
 override_dh_install:
 	dh_install
 	install -DT album_database.sql debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/install/mysql
+	cat album_sample_data.sql >> debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/install/mysql
 	install -DT album_database_upgrade1.pl debian/bubba-album/usr/share/dbconfig-common/data/bubba-album/upgrade/scripts/2.0.0.5
 	dh_codeigniter --destdir=/usr/share/album -x

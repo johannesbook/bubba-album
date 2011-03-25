@@ -36,6 +36,7 @@ case "$1" in
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album/thumbs
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album/thumbs/rescaled
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album/thumbs/thumbs
+
 		invoke-rc.d apache2 reload;
 		;;
 
