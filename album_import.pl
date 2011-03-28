@@ -5,7 +5,9 @@ use strict;
 package Bubba::Album;
 use DBI;
 use Image::ExifTool;
+use Image::Magick;
 use File::Basename;
+use File::Type;
 use List::Util qw(max);
 
 use Perl6::Say;
@@ -157,20 +159,34 @@ sub _process_thumb_work_queue {
 
 		$self->Debug("Processing thumbs for $current->{file}");
 
-		system( 
-			"epeg",
-			"-m",
-			max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
-			$current->{file},
-			THUMB_PATH . "/$current->{id}"
-		);
+		my $mimetype = mime_type($current->{file});
 
-		system( 
-			"epeg",
-			"-m ".SCALE_WIDTH,
-			$current->{file},
-			SCALE_PATH . "/$current->{id}"
-		);
+		if( $mimetype eq "image/png" ) {
+			my $p = new Image::Magick;
+			$p->Read($current->{file});
+			$p->Thumbnail( geometry => SCALE_WIDTH."x" );
+			$p->Write(SCALE_PATH . "/$current->{id}");		
+			$p->Set( Gravity => 'Center' );
+			$p->Thumbnail( geometry => THUMB_WIDTH.'x'THUMB_HEIGHT.'^' );
+			$p->Set(background => 'transparent');
+			$p->Extent( geometry => THUMB_WIDTH.'x'THUMB_HEIGHT );
+			$p->Write(THUMB_PATH . "/$current->{id}");		
+		} elsif( $mimetype eq "image/jpg" ) {
+			system( 
+				"epeg",
+				"-m",
+				max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
+				$current->{file},
+				THUMB_PATH . "/$current->{id}"
+			);
+
+			system( 
+				"epeg",
+				"-m ".SCALE_WIDTH,
+				$current->{file},
+				SCALE_PATH . "/$current->{id}"
+			);
+		}
 	}
 }
 

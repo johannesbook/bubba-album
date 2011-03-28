@@ -13,6 +13,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  epeg,
  mysql-server (>= 5.0) | mysql-server-5.0 | mysql-server-5.1,
  libimage-exiftool-perl,
+ perlmagick,
  libfile-type-perl
 Description: The codeigniter based album public interface
  An public album interface for the Bubba album suite
