@@ -73,15 +73,38 @@ class Image extends Controller {
 			$this->output->set_output(file_get_contents($path));
 		}
 	}
+	function thumb_notfound() {
+		$this->load->helper('album');
+		$this->output->set_header('Content-Type: image/png');
+		$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode('thumb_notfound.png'));
+		$path = 'views/_img/thumb_notfound.png';
+		if( cache_control( $path ) ) {
+			$this->output->set_output(file_get_contents($path));
+		}
+	}
+	function medium_notfound() {
+		$this->load->helper('album');
+		$this->output->set_header('Content-Type: image/png');
+		$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode('medium_notfound.png'));
+		$path = 'views/_img/medium_notfound.png';
+		if( cache_control( $path ) ) {
+			$this->output->set_output(file_get_contents($path));
+		}
+	}
+
 	function thumb( $id ) {
 		if( $this->_image_access( $id ) ) {
-			$this->load->helper('album');
-			$this->load->model("Album_model");
-			list( $name, $path ) = $this->Album_model->get_thumbnail( $id );
-			$this->output->set_header('Content-Type: '. mime_content_type( $path ));
-			$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode($name));
-			if( cache_control( $path ) ) {
-				$this->output->set_output(file_get_contents($path));
+			try {
+				$this->load->helper('album');
+				$this->load->model("Album_model");
+				list( $name, $path ) = $this->Album_model->get_thumbnail( $id );
+				$this->output->set_header('Content-Type: '. mime_content_type( $path ));
+				$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode($name));
+				if( cache_control( $path ) ) {
+					$this->output->set_output(file_get_contents($path));
+				}
+			} catch(ImageNotGeneratedException $e) {
+				redirect("image/thumb_notfound");
 			}
 		} else {
 			redirect("image/locked");
@@ -89,13 +112,17 @@ class Image extends Controller {
 	}
 	function medium( $id ) {
 		if( $this->_image_access( $id ) ) {
-			$this->load->helper('album');
-			$this->load->model("Album_model");
-			list( $name, $path ) = $this->Album_model->get_medium_image( $id );
-			$this->output->set_header('Content-Type: '. mime_content_type( $path ));
-			$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode($name));
-			if( cache_control( $path ) ) {
-				$this->output->set_output(file_get_contents($path));
+			try {
+				$this->load->helper('album');
+				$this->load->model("Album_model");
+				list( $name, $path ) = $this->Album_model->get_medium_image( $id );
+				$this->output->set_header('Content-Type: '. mime_content_type( $path ));
+				$this->output->set_header('Content-Disposition: inline; filename*=utf-8\'\''.rawurlencode($name));
+				if( cache_control( $path ) ) {
+					$this->output->set_output(file_get_contents($path));
+				}
+			} catch(ImageNotGeneratedException $e) {
+				redirect("image/medum_notfound");
 			}
 		} else {
 			redirect("image/locked");

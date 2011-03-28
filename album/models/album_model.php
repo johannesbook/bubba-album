@@ -1,5 +1,5 @@
 <?php
-
+class ImageNotGeneratedException extends Exception { }
 class Album_model extends Model {
 	function __construct() {
 		parent::Model();
@@ -157,8 +157,14 @@ class Album_model extends Model {
 			$id = $image;
 
 			$thumb_path = get_thumb_path( $id );
+			$image_path =  get_image_path( $path );
 			if( ! file_exists( $thumb_path ) ) {
-				create_thumb( get_image_path( $path ), $thumb_path );
+				$mimetype = image_type_to_mime_type(exif_imagetype($image_path));
+				if( $mimetype == 'image/jpeg' ) {
+					create_thumb( $image_path, $thumb_path );
+				} else {
+					throw new ImageNotGeneratedException($image_path); 
+				}
 			}
 			return array( $name, $thumb_path );
 		}
@@ -177,8 +183,13 @@ class Album_model extends Model {
 			$id = $image;
 
 			$thumb_path = get_rescaled_path( $id );
+			$mimetype = image_type_to_mime_type(exif_imagetype($image_path));
 			if( ! file_exists( $thumb_path ) ) {
-				create_rescaled( get_image_path( $path ), $thumb_path );
+				if( $mimetype == 'image/jpeg' ) {
+					create_rescaled( $image_path, $thumb_path );
+				} else {
+					throw new ImageNotGeneratedException($image_path); 
+				}
 			}
 			return array( $name, $thumb_path );
 		}
