@@ -1,4 +1,4 @@
-bubba-album (2.1.8) hugo vincent; urgency=low
+bubba-album (2.1.9) hugo vincent; urgency=low
 
   * Adding PNG support using imagemagick 
 

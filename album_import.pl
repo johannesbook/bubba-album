@@ -167,9 +167,9 @@ sub _process_thumb_work_queue {
 			$p->Thumbnail( geometry => SCALE_WIDTH."x" );
 			$p->Write(SCALE_PATH . "/$current->{id}");		
 			$p->Set( Gravity => 'Center' );
-			$p->Thumbnail( geometry => THUMB_WIDTH.'x'THUMB_HEIGHT.'^' );
+			$p->Thumbnail( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT.'^' );
 			$p->Set(background => 'transparent');
-			$p->Extent( geometry => THUMB_WIDTH.'x'THUMB_HEIGHT );
+			$p->Extent( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT );
 			$p->Write(THUMB_PATH . "/$current->{id}");		
 		} elsif( $mimetype eq "image/jpg" ) {
 			system( 
