@@ -373,24 +373,33 @@ class Album_model extends Model {
 				$added = array_merge( $added, $this->_batch_add( scandir( "." ), $subalbum_id ) );
 				chdir ( '..' );
 			} else {
-				if( filesize( $file ) == 0 || exif_imagetype( $file ) != IMAGETYPE_JPEG ) {
+				if( filesize( $file ) == 0 ) {
 					$added[realpath($file)] = false;
 					continue;
 				}
-				$added[realpath($file)] = true;
-				list( $width, $height ) = getimagesize( $file );
-				$this->db->insert( 
-					'image', 
-					array( 
-						'album' => $parent,  
-						'name' => basename($file),
-						'path' => realpath($file), 
-						'width' => $width, 
-						'height' => $height
-					)
-				);
-				$image_id = $this->db->insert_id();
-				$to_process[$image_id] = realpath($file);
+				$mimetype = image_type_to_mime_type(exif_imagetype($file));
+
+				switch($mimetype) {
+				case "image/jpeg":
+				case "image/png":
+					$added[realpath($file)] = true;
+					list( $width, $height ) = getimagesize( $file );
+					$this->db->insert( 
+						'image', 
+						array( 
+							'album' => $parent,  
+							'name' => basename($file),
+							'path' => realpath($file), 
+							'width' => $width, 
+							'height' => $height
+						)
+					);
+					$image_id = $this->db->insert_id();
+					$to_process[$image_id] = realpath($file);
+					break;
+				default:
+					$added[realpath($file)] = false;
+				}
 			}
 		}
 		$this->_batch_add_socket( $to_process );
