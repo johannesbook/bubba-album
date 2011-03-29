@@ -1,3 +1,9 @@
+bubba-album (2.1.10) hugo vincent; urgency=low
+
+  * update thumb waiting image 
+
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 29 Mar 2011 13:17:15 +0200
+
 bubba-album (2.1.9) hugo vincent; urgency=low
 
   * Adding PNG support using imagemagick 
