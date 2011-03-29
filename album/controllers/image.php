@@ -122,7 +122,7 @@ class Image extends Controller {
 					$this->output->set_output(file_get_contents($path));
 				}
 			} catch(ImageNotGeneratedException $e) {
-				redirect("image/medum_notfound");
+				redirect("image/medium_notfound");
 			}
 		} else {
 			redirect("image/locked");

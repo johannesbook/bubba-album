@@ -7,7 +7,7 @@ use DBI;
 use Image::ExifTool;
 use Image::Magick;
 use File::Basename;
-use File::Type;
+use File::MimeInfo;
 use List::Util qw(max);
 
 use Perl6::Say;
@@ -38,6 +38,7 @@ sub new($$;$) {
 	$self->{EXIF_WORK_QUEUE} = new Thread::Queue;
 	$self->{THUMB_WORK_QUEUE} = new Thread::Queue;
 	$self->{IS_RUNNING} = 0;
+	$self->{IS_POSTPROC} = 0;
 	$self->{IS_IDLE} = 0;
 
 	$self;
@@ -46,6 +47,7 @@ sub new($$;$) {
 sub PostDaemonize {
 	my ($self) = @_;
 	share($self->{IS_RUNNING});
+	share($self->{IS_POSTPROC});
 	share($self->{IS_IDLE});
 	threads->create( \&_process_exif_work_queue, $self );
 	threads->create( \&_process_thumb_work_queue, $self );
@@ -54,7 +56,7 @@ sub PostDaemonize {
 
 sub Loop($) {
 	my ($self) = @_;
-	$self->{IS_RUNNING} = $self->{EXIF_WORK_QUEUE}->pending || $self->{THUMB_WORK_QUEUE}->pending;
+	$self->{IS_RUNNING} = $self->{EXIF_WORK_QUEUE}->pending || $self->{THUMB_WORK_QUEUE}->pending || $self->{IS_POSTPROC} > 0;
 	if( $self->{IS_RUNNING} ) {
 		$self->Debug("Loop: is still running");
 		$self->{IS_IDLE} = 0;
@@ -154,23 +156,33 @@ sub _process_thumb_work_queue {
 	while(1) {
 		next if $self->{EXIF_WORK_QUEUE}->pending;
 		next unless $self->{THUMB_WORK_QUEUE}->pending;
-
+		++$self->{IS_POSTPROC};
 		my $current = $self->{THUMB_WORK_QUEUE}->dequeue;
 
 		$self->Debug("Processing thumbs for $current->{file}");
 
-		my $mimetype = mime_type($current->{file});
+		my $mimetype = mimetype($current->{file});
 
 		if( $mimetype eq "image/png" ) {
+			$self->Debug("It's an PNG!");
 			my $p = new Image::Magick;
-			$p->Read($current->{file});
-			$p->Thumbnail( geometry => SCALE_WIDTH."x" );
-			$p->Write(SCALE_PATH . "/$current->{id}");		
-			$p->Set( Gravity => 'Center' );
-			$p->Thumbnail( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT.'^' );
-			$p->Set(background => 'transparent');
-			$p->Extent( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT );
-			$p->Write(THUMB_PATH . "/$current->{id}");		
+			my $x;
+			$x=$p->Read($current->{file});
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Thumbnail( geometry => SCALE_WIDTH."x" );
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Write(SCALE_PATH . "/$current->{id}");		
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Set( Gravity => 'Center' );
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Thumbnail( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT.'^' );
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Set(background => 'transparent');
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Extent( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT );
+			$self->Debug("Warning: $x") if $x;
+			$x=$p->Write(THUMB_PATH . "/$current->{id}");		
+			$self->Debug("Warning: $x") if $x;
 		} elsif( $mimetype eq "image/jpg" ) {
 			system( 
 				"epeg",
@@ -187,6 +199,7 @@ sub _process_thumb_work_queue {
 				SCALE_PATH . "/$current->{id}"
 			);
 		}
+		--$self->{IS_POSTPROC};
 	}
 }
 

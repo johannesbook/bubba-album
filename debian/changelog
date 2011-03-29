@@ -2,7 +2,7 @@ bubba-album (2.1.9) hugo vincent; urgency=low
 
   * Adding PNG support using imagemagick 
 
- -- Carl Fürstenberg <carl@excito.com>  Mon, 28 Mar 2011 15:27:21 +0200
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 29 Mar 2011 12:14:09 +0200
 
 bubba-album (2.1.7) hugo vincent; urgency=low
 

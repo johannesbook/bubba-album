@@ -183,6 +183,7 @@ class Album_model extends Model {
 			$id = $image;
 
 			$thumb_path = get_rescaled_path( $id );
+			$image_path =  get_image_path( $path );
 			$mimetype = image_type_to_mime_type(exif_imagetype($image_path));
 			if( ! file_exists( $thumb_path ) ) {
 				if( $mimetype == 'image/jpeg' ) {
