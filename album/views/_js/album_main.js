@@ -468,7 +468,7 @@ var dialog_callbacks = {
 var dialogs = {};
 var buttons = [{
 		'id': 'fn-albummanager-button-create',
-		'klass': 'ui-manager-access',
+		'class': 'ui-manager-access',
 		'disabled': ! manager_access,
 		'manager': true,
 		'type': 'ui-icons ui-album-icons ui-album-icon-create',
