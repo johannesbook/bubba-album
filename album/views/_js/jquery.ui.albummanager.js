@@ -197,7 +197,7 @@ jQuery.widget("ui.albummanager", {
 				   images.empty();
 				   $("#fn-albummanager-image-header-albumname").empty();
 
-				   $.each( self._images, function() {
+				   $.each( self._images.sort(naturalSort), function() {
 						   var acell = jQuery('#fn-templates .ui-album-image').clone();
 						   acell.css(
 							   {

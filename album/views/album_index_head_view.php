@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?=$this->config->item("base_url")?>/views/_css/jquery.colorbox.css" />
 
+<script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/natural_sort.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.form.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.form.wizard.js"></script>
 <script type="text/javascript" src="<?=$this->config->item("base_url")?>/views/_js/jquery.history.js"></script>
