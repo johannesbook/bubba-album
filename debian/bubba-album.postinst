@@ -31,6 +31,11 @@ db_stop
 
 case "$1" in
 	configure)
+        if [ "$2" = "" ]; then
+			mkdir -p /home/storage/pictures
+            ln -sf /usr/share/bubba-album/samples /home/storage/pictures/samples
+        fi
+
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album/thumbs
 		install --directory --mode=0755 --owner=www-data --group=www-data /var/lib/album/thumbs/rescaled

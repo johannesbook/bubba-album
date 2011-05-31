@@ -1,3 +1,9 @@
+bubba-album (2.1.14) hugo vincent; urgency=low
+
+  * samples again
+
+ -- Carl Fürstenberg <azatoth@gmail.com>  Tue, 31 May 2011 13:05:41 +0200
+
 bubba-album (2.1.13) hugo vincent; urgency=low
 
   * Remove the sample inclusion
