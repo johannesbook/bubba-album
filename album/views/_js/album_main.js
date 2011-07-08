@@ -879,7 +879,6 @@ $(function() {
 		var buttonpane = dialogs['create'].dialog('widget').children('.ui-dialog-buttonpane');
 		$("#fn-albummanager-create").formwizard({
 				historyEnabled: !true,
-				focusFirstInput: true,
 				validationEnabled: true,
 				formPluginEnabled: true,
 				back: buttonpane.find('.ui-prev-button'),
