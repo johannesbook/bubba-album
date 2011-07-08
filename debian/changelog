@@ -1,3 +1,9 @@
+bubba-album (2.3~rc1) vincent hugo; urgency=low
+
+  * Remove focus of first input flag
+
+ -- Carl Fürstenberg <carl@excito.com>  Fri, 08 Jul 2011 15:30:50 +0200
+
 bubba-album (2.1.14) hugo vincent; urgency=low
 
   * samples again
