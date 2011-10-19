@@ -1,3 +1,9 @@
+bubba-album (2.4~pre1) vincent; urgency=low
+
+  * Ignore all files starting with a dot (Closes #1729)
+
+ -- Carl Fürstenberg <azatoth@gmail.com>  Wed, 19 Oct 2011 15:31:54 +0200
+
 bubba-album (2.3) vincent hugo; urgency=low
 
   * Bumping version for release
