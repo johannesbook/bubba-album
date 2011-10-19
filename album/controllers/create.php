@@ -40,7 +40,7 @@ class Create extends Controller {
 				$files = array();
 				if ($dh = opendir($path)) {
 					while (($file = readdir($dh)) !== false) {
-						if( $file == '.'  || $file == '..' ) {
+						if( preg_match('#^\.#',  $file) ) {
 							continue;
 						}
 						$filename = $path . '/' . $file;
