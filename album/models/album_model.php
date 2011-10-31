@@ -350,18 +350,27 @@ class Album_model extends Model {
 		}
 		$what = array_map( create_function('$a', 'return mysql_escape_string($a);'), $what );
 		return '('.implode(',',$what).')';
-	}
-	function _batch_add_socket( $process ) {
-		syslog( LOG_INFO, 'here' );
-		$sock = new BubbaAlbumSocket();
-		$ret = "";
+    }
+
+    function _batch_add_worker( $process ) {
+        if(! is_dir('/var/spool/album') ) {
+            syslog(LOG_ERR,"Spool directory was not found for the album, unable to import");
+            return;
+        }
 		foreach( $process as $id => $file ) {
-			$sock->say( json_encode( array( 'action' => 'add', 'id' => $id, 'file' => $file ) ) );
-			$ret = $sock->getline();
+            symlink($file, "/var/spool/album/$id");
 		}
-		$sock->close();
-		return $ret;
+        if( file_exists('/tmp/bubba-album.pid') ) {
+            $pid = trim(file_get_contents('/tmp/bubba-album.pid'));
+            if (posix_kill($pid, 0)) {
+                # pid file found, but process not running
+                return;
+            }
+        }
+        exec("/usr/sbin/album_import.pl");
 	}
+
+
 	function batch_add( $files, $album , $public = false) {
 		$origdir = getcwd();
 		$added = $this->_batch_add( $files, $album, $public );
@@ -414,7 +423,7 @@ class Album_model extends Model {
 				}
 			}
 		}
-		$this->_batch_add_socket( $to_process );
+		$this->_batch_add_worker( $to_process );
 		return $added;
 	}	
 

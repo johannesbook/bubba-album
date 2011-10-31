@@ -1,3 +1,9 @@
+bubba-album (2.4~pre2) oneiric; urgency=low
+
+  * Reinvent the album_import worker
+
+ -- Carl Fürstenberg <carl@excito.com>  Mon, 31 Oct 2011 17:30:10 +0100
+
 bubba-album (2.4~pre1) vincent; urgency=low
 
   * Ignore all files starting with a dot (Closes #1729)

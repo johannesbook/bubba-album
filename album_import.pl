@@ -2,28 +2,15 @@
 
 use strict;
 
-package Bubba::Album;
 use DBI;
 use Image::ExifTool;
 use Image::Magick;
 use File::Basename;
 use File::MimeInfo;
 use List::Util qw(max);
+use Proc::Daemon;
+use Sys::Syslog qw(:standard :macros);
 
-use Perl6::Say;
-use JSON;
-use threads;
-use threads::shared;
-use Thread::Queue;
-use base qw(Net::Daemon);
-
-
-use vars qw($exit);
-use vars qw($VERSION);
-
-$VERSION = '0.0.1';
-
-use constant SOCKNAME		=> "/tmp/bubba-album.socket";
 use constant PIDFILE		=> '/tmp/bubba-album.pid';
 use constant THUMB_WIDTH	=> 100;
 use constant THUMB_HEIGHT	=> 100;
@@ -31,193 +18,126 @@ use constant SCALE_WIDTH	=> 600;
 use constant CACHE_PATH		=> '/var/lib/album/thumbs';
 use constant THUMB_PATH		=> CACHE_PATH . '/thumbs';
 use constant SCALE_PATH		=> CACHE_PATH . '/rescaled';
+use constant SPOOL_PATH     => '/var/spool/album';
 
-sub new($$;$) {
-	my($class, $attr, $args) = @_;
-	my($self) = $class->SUPER::new($attr, $args);
-	$self->{EXIF_WORK_QUEUE} = new Thread::Queue;
-	$self->{THUMB_WORK_QUEUE} = new Thread::Queue;
-	$self->{IS_RUNNING} = 0;
-	$self->{IS_POSTPROC} = 0;
-	$self->{IS_IDLE} = 0;
 
-	$self;
+unless( -d CACHE_PATH ) {
+    mkdir CACHE_PATH;
+}
+unless( -d THUMB_PATH ) {
+    mkdir THUMB_PATH;
+}
+unless( -d SCALE_PATH ) {
+    mkdir SCALE_PATH;
+}
+unless( -d SPOOL_PATH ) {
+    mkdir SPOOL_PATH;
 }
 
-sub PostDaemonize {
-	my ($self) = @_;
-	share($self->{IS_RUNNING});
-	share($self->{IS_POSTPROC});
-	share($self->{IS_IDLE});
-	threads->create( \&_process_exif_work_queue, $self );
-	threads->create( \&_process_thumb_work_queue, $self );
+my $daemon = Proc::Daemon->new(
+    pid_file => PIDFILE,
+    work_dir => '/'
+);
+
+my $kid_pid = $daemon->Init;
+
+if( $kid_pid ) {
+    exit;
 }
 
+openlog("album-import", "", LOG_USER);
+syslog(LOG_INFO, "Starting album import worker");
 
-sub Loop($) {
-	my ($self) = @_;
-	$self->{IS_RUNNING} = $self->{EXIF_WORK_QUEUE}->pending || $self->{THUMB_WORK_QUEUE}->pending || $self->{IS_POSTPROC} > 0;
-	if( $self->{IS_RUNNING} ) {
-		$self->Debug("Loop: is still running");
-		$self->{IS_IDLE} = 0;
-		return;
-	}
-	$self->Debug("Loop: We are not running at the moment, idle for $self->{IS_IDLE} revolutions");
-	if( ++$self->{IS_IDLE} >= 2 ) {
-		$self->Log('notice', "Timeout: %s server terminating", ref($self));
-		# cleaning up
-		-f $self->{'pidfile'} and unlink $self->{'pidfile'};
-		-S $self->{'localpath'} and unlink $self->{'localpath'};
-		kill 'INT', $$;
-	}
+my $dbh;
+{
+    my $db = { do '/etc/album/debian-db.perl' };
+    $dbh = DBI->connect(
+        "dbi\:$db->{type}\:database=$db->{name};host=$db->{host};port=$db->{port}",
+        $db->{user},
+        $db->{pass},
+        {
+            RaiseError => 1,
+            AutoCommit => 1
+        }
+    );
+    $dbh->do("SET NAMES UTF8");
+}
+my $update_image_table = $dbh->prepare("UPDATE image SET name=?, caption=? WHERE id=?");
 
 
+if( opendir( my $spool, SPOOL_PATH ) ) {
+    LOOP: while(1) {
+        # Grab all current symlinks in the spool dir
+        my %queue = map { $_ => readlink(SPOOL_PATH . '/' . $_) } grep { -l SPOOL_PATH . '/' . $_ } readdir( $spool );
+        unless(scalar keys %queue) {
+            syslog(LOG_INFO, "processing completed, shutting down");
+            # we are done this time
+            last LOOP;
+        }
+        while(my($id, $image) = each(%queue) ) {
+            if($image) {
+                syslog(LOG_INFO, "Processing image %s with id %d", $image, $id);
+                process_exif($id, $image);
+                process_thumb($id, $image);
+            }
+            unlink(SPOOL_PATH . '/' . $id);
+        }
+        # Don't be too hasty here.
+        sleep 10;
+    }
+    closedir( $spool );
 }
 
-sub Run($) {
-	my $json = new JSON;
-	my ($self) = @_;
-	$self->Debug('in Run');
-	my ($line,$sock);
-	$sock = $self->{'socket'};
-	while(1) {
-		if (!defined($line = $sock->getline())) {
-			if ($sock->error()) {
-				$self->Error("Client connection error %s",
-					$sock->error());
-			}
-			$sock->close();
-			return;
-		}
-		$line =~ s/\s+$//; # Remove CRLF
+sub process_exif {
+    my( $id, $image ) = @_;
 
-		my $request;
-		eval { $request = $json->decode($line) } || $self->Fatal("Unable to parse \"%s\": %s", $line, $!);
-		if( exists $request->{action} ) {
-			my $cmd = $request->{action};
-			if( $cmd eq 'add' ) {
-				$self->{IS_RUNNING} = 1;
-				my %current : shared = (
-					'file' => $request->{file},
-					'id' => $request->{id},
-				);
-				$self->{EXIF_WORK_QUEUE}->enqueue(\%current);
-				$self->Log('notice', "Added $request->{file} with id $request->{id}");
-				$sock->say( $json->encode( { 'response' => 'added' } ) );
-			}
-		}
-	}
+    my $exifTool = new Image::ExifTool();
+
+    $exifTool->ExtractInfo( $image );
+
+    my $info = $exifTool->GetInfo(
+        'ImageWidth',
+        'ImageHeight',
+        'Title',
+        'Subject',
+    );
+
+    my $title = $info->{Title} ? $info->{Title} : basename( $image );
+
+    $update_image_table->execute( $title, $info->{Subject}, $id);
 }
 
-sub _process_exif_work_queue {
-	my ($self) = @_;
-	threads->detach();
-	my $dbh;
-	{
-		my $db = { do '/etc/album/debian-db.perl' };
-		$dbh = DBI->connect( "dbi\:$db->{type}\:database=$db->{name};host=$db->{host};port=$db->{port}", $db->{user}, $db->{pass}, { RaiseError => 1, AutoCommit => 1} );
-		$dbh->do("SET NAMES UTF8");
-	}
-	my $sth = $dbh->prepare("UPDATE image SET name=?, caption=? WHERE id=?");
+sub process_thumb {
+    my( $id, $image ) = @_;
 
-	while(1) {
-		next unless $self->{EXIF_WORK_QUEUE}->pending;
+    my $mimetype = mimetype($image);
 
-		my $current = $self->{EXIF_WORK_QUEUE}->dequeue;
+    if( $mimetype eq "image/png" ) {
+        my $p = new Image::Magick;
+        my $x;
+        $x=$p->Read($image);
+        $x=$p->Thumbnail( geometry => SCALE_WIDTH."x" );
+        $x=$p->Write(SCALE_PATH . "/$id");
+        $x=$p->Set( Gravity => 'Center' );
+        $x=$p->Thumbnail( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT.'^' );
+        $x=$p->Set(background => 'transparent');
+        $x=$p->Extent( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT );
+        $x=$p->Write(THUMB_PATH . "/$id");
+    } elsif( $mimetype eq "image/jpg" || $mimetype eq "image/jpeg" ) {
+        system(
+            "epeg",
+            "-m",
+            max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
+            $image,
+            THUMB_PATH . "/$id"
+        );
 
-		my $exifTool = new Image::ExifTool();
-
-		$self->Debug("Processing EXIF for $current->{file}");
-
-		$exifTool->ExtractInfo( $current->{file} );
-
-		my $info = $exifTool->GetInfo(
-			'ImageWidth',
-			'ImageHeight',
-			'Title',
-			'Subject',
-		);
-
-		my $title = $info->{Title} ? $info->{Title} : basename( $current->{file} ); 
-
-		$sth->execute( $title, $info->{Subject}, $current->{id});
-
-		$current->{width} = $info->{ImageWidth};
-		$current->{height} = $info->{ImageHeight};
-
-		$self->{THUMB_WORK_QUEUE}->enqueue($current);
-
-	}
+        system(
+            "epeg",
+            "-m ".SCALE_WIDTH,
+            $image,
+            SCALE_PATH . "/$id"
+        );
+    }
 }
 
-sub _process_thumb_work_queue {
-	threads->detach();
-	my ($self) = @_;
-	while(1) {
-		next if $self->{EXIF_WORK_QUEUE}->pending;
-		next unless $self->{THUMB_WORK_QUEUE}->pending;
-		++$self->{IS_POSTPROC};
-		my $current = $self->{THUMB_WORK_QUEUE}->dequeue;
-
-		$self->Debug("Processing thumbs for $current->{file}");
-
-		my $mimetype = mimetype($current->{file});
-
-		if( $mimetype eq "image/png" ) {
-			$self->Debug("It's an PNG!");
-			my $p = new Image::Magick;
-			my $x;
-			$x=$p->Read($current->{file});
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Thumbnail( geometry => SCALE_WIDTH."x" );
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Write(SCALE_PATH . "/$current->{id}");		
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Set( Gravity => 'Center' );
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Thumbnail( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT.'^' );
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Set(background => 'transparent');
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Extent( geometry => THUMB_WIDTH.'x'.THUMB_HEIGHT );
-			$self->Debug("Warning: $x") if $x;
-			$x=$p->Write(THUMB_PATH . "/$current->{id}");		
-			$self->Debug("Warning: $x") if $x;
-		} elsif( $mimetype eq "image/jpg" ) {
-			system( 
-				"epeg",
-				"-m",
-				max( THUMB_HEIGHT, THUMB_WIDTH ) * 2,
-				$current->{file},
-				THUMB_PATH . "/$current->{id}"
-			);
-
-			system( 
-				"epeg",
-				"-m ".SCALE_WIDTH,
-				$current->{file},
-				SCALE_PATH . "/$current->{id}"
-			);
-		}
-		--$self->{IS_POSTPROC};
-	}
-}
-
-package main;
-
-unless( -d Bubba::Album::CACHE_PATH ) {
-	mkdir Bubba::Album::CACHE_PATH;
-}
-unless( -d Bubba::Album::THUMB_PATH ) {
-	mkdir Bubba::Album::THUMB_PATH;
-}
-unless( -d Bubba::Album::SCALE_PATH ) {
-	mkdir Bubba::Album::SCALE_PATH;
-}
-
-my $server = new Bubba::Album({
-		localpath => Bubba::Album::SOCKNAME, 
-		pidfile => Bubba::Album::PIDFILE,
-		'loop-timeout' => 30, 
-	}, \@ARGV);
-$server->Bind();
