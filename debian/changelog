@@ -1,3 +1,10 @@
+bubba-album (2.4~pre3) vincent hugo; urgency=low
+
+  * updating licensing information to fit company policy
+  * move the opendir inside the loop
+
+ -- Carl Fürstenberg <carl@excito.com>  Tue, 10 Jan 2012 15:24:04 +0100
+
 bubba-album (2.4~pre2) oneiric; urgency=low
 
   * Reinvent the album_import worker
