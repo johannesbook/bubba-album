@@ -65,8 +65,8 @@ my $dbh;
 my $update_image_table = $dbh->prepare("UPDATE image SET name=?, caption=? WHERE id=?");
 
 
-if( opendir( my $spool, SPOOL_PATH ) ) {
-    LOOP: while(1) {
+LOOP: while(1) {
+    if( opendir( my $spool, SPOOL_PATH ) ) {
         # Grab all current symlinks in the spool dir
         my %queue = map { $_ => readlink(SPOOL_PATH . '/' . $_) } grep { -l SPOOL_PATH . '/' . $_ } readdir( $spool );
         unless(scalar keys %queue) {
@@ -83,9 +83,9 @@ if( opendir( my $spool, SPOOL_PATH ) ) {
             unlink(SPOOL_PATH . '/' . $id);
         }
         # Don't be too hasty here.
+        closedir( $spool );
         sleep 10;
     }
-    closedir( $spool );
 }
 
 sub process_exif {
